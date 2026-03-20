@@ -1,0 +1,726 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sucursal 2 - Cinema PHOVL</title>
+
+  <style>
+    :root{
+      --bg:#3d0652;           
+      --sidebar:#f1e208;      
+      --radius:12px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+    }
+
+    body{
+      margin:0;
+      background: var(--bg);
+      color:white;
+      display:flex;
+    }
+
+    /* SIDEBAR */
+    .sidebar{
+      width:240px;
+      background:var(--sidebar);
+      color:black;
+      padding:20px 0;
+      display:flex;
+      flex-direction:column;
+      position:fixed;
+      top:0;
+      bottom:0;
+      left:0;
+      overflow:hidden;
+      transition:width .4s ease;
+      border-right:4px solid black;
+    }
+
+    .sidebar.collapsed{
+      width:58px;
+    }
+
+    .sidebar .logo{
+      font-size:22px;
+      font-weight:700;
+      padding-left:20px;
+      margin-bottom:10px;
+      display:flex;
+      align-items:center;
+      cursor:pointer;
+      white-space:nowrap;
+      color:black;
+    }
+
+    .menu-items{
+      display:flex;
+      flex-direction:column;
+      gap:14px;
+      padding-top:10px;
+      padding-bottom:20px;
+      transition:opacity .4s ease;
+    }
+
+    .menu-items.hidden{
+      opacity:0;
+      pointer-events:none;
+    }
+
+    .sidebar a, .sidebar button{
+      width:100%;
+      padding:12px 20px;
+      font-size:15px;
+      color:black;
+      text-decoration:none;
+      background:none;
+      border:none;
+      text-align:left;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .sidebar a:hover,
+    .sidebar button:hover{
+      background:rgb(83, 0, 79);
+      color:var(--sidebar);
+    }
+
+    .dropdown-content{
+      display:none;
+      flex-direction:column;
+      background:#d8b000;
+    }
+
+    .dropdown-content a{
+      padding-left:40px;
+    }
+
+    .dropdown:hover .dropdown-content{
+      display:flex;
+    }
+
+    /* CONTENIDO */
+    .container{
+      margin-left:260px;
+      padding:24px;
+      width:calc(100% - 260px);
+      transition:margin-left .4s ease, width .4s ease;
+      color:white;
+    
+    }
+
+    .sidebar.collapsed + .container{
+      margin-left:80px;
+      width:calc(100% - 80px);
+    }
+
+    h2{
+      margin-top:20px;
+      font-size:28px;
+      color:white;
+      text-shadow:2px 2px 5px black;
+      text-align:center;
+    }
+
+    p{
+      text-align:center;
+      font-size:18px;
+      margin-top:10px;
+    }
+
+    /* ESTILOS PARA LAS PELICULAS */
+    .pelicula-card{
+      background:#4b0a63;
+      padding:16px;
+      border-radius:12px;
+      margin-top:25px;
+      display:flex;
+      gap:16px;
+      border:2px solid black;
+      box-shadow:0 0 10px black;
+    }
+
+    .pelicula-card img{
+      width:150px;
+      height:220px;
+      object-fit:cover;
+      border-radius:10px;
+      border:2px solid #f1e208;
+    }
+
+    .info{
+      flex:1;
+    }
+
+    .info h3{
+      margin:0;
+      font-size:22px;
+      color:#f1e208;
+    }
+
+    .info p{
+      text-align:left;
+      margin:6px 0;
+    }
+
+    .titulo-botones{
+      font-size:17px;
+      font-weight:bold;
+      margin-top:10px;
+      color:#f1e208;
+    }
+
+    .botones-h{
+      display:flex;
+      gap:10px;
+      margin-top:6px;
+    }
+
+    .botones-h button{
+      padding:6px 10px;
+      background:#f1e208;
+      border:none;
+      color:black;
+      font-weight:bold;
+      border-radius:6px;
+      cursor:pointer;
+      border:2px solid black;
+      font-size:14px;
+    }
+
+    .botones-h button:hover{
+      background:white;
+    }
+
+    .trailer-btn{
+      margin-top:10px;
+      padding:8px 14px;
+      background:red;
+      border:none;
+      color:white;
+      cursor:pointer;
+      font-weight:bold;
+      border-radius:6px;
+      border:2px solid black;
+    }
+
+    .trailer-btn:hover{
+      background:darkred;
+    }
+
+    :root{
+        --morado:#3d0652;
+        --dorado:#f1e208;
+        --gris:#cccccc;
+    }
+
+
+    .calendar-container{
+        width:320px;
+        margin:auto;
+        text-align:center;
+    }
+
+    #monthButton{
+        display:block;
+        width:100%;
+        background:none;
+        border:none;
+        font-size:22px;
+        font-weight:bold;
+        color:white;
+        margin-bottom:15px;
+        cursor:pointer;
+        text-transform:uppercase;
+    }
+
+    .week{
+        display:flex;
+        gap:5px;
+        margin-bottom:20px;
+    }
+
+    .day{
+        flex:1;
+        padding:10px 0;
+        background:#555;
+        color:white;
+        border-radius:8px;
+        cursor:pointer;
+        transition:0.2s;
+        font-weight:bold;
+    }
+
+    .day.selected{
+        background:var(--dorado);
+        color:black;
+    }
+
+    .mini-calendar{
+        background:var(--morado);
+        padding:15px;
+        border-radius:12px;
+        color:var(--dorado);
+        display:none;
+    }
+
+    .mini-header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        font-size:20px;
+        font-weight:bold;
+        margin-bottom:10px;
+    }
+
+    .mini-header button{
+        background:none;
+        border:none;
+        font-size:20px;
+        color:var(--dorado);
+        cursor:pointer;
+    }
+
+    .calendar-grid{
+        display:grid;
+        grid-template-columns:repeat(7, 1fr);
+        gap:5px;
+    }
+
+    .calendar-grid div{
+        padding:8px 0;
+        border-radius:6px;
+        cursor:pointer;
+    }
+
+    .calendar-grid div:not(.disabled):hover{
+        background:#633080;
+    }
+
+    .selected-day{
+        background:var(--dorado) !important;
+        color:black !important;
+    }
+
+    .disabled{
+        opacity:0.3;
+        pointer-events:none;
+    }
+
+    .preventa-title{
+    text-align:center;
+    font-size:32px;
+    color:#f1e208;
+    margin-top:50px;
+    text-shadow:2px 2px 8px black;
+}
+
+.preventa-sub{
+  text-align:center;
+  font-size:18px;
+  margin-bottom:25px;
+  color:white;
+}
+
+.preventa-card{
+  border:4px solid gold;
+  box-shadow:0 0 25px gold;
+}
+
+  </style>
+</head>
+
+<body>
+
+<!-- SIDEBAR -->
+<div class="sidebar" id="sidebarPanel">
+  <div class="logo" id="toggleMenu">🎬 Cinema PHOVL</div>
+
+  <div class="menu-items" id="menuItems">
+    <a href="Pagina Principal.html">Inicio</a>
+
+    <div class="dropdown">
+      <button>Sucursales ▼</button>
+      <div class="dropdown-content">
+        <a href="sucursal1.html">Sucursal 1</a>
+        <a href="sucursal2.html">Sucursal 2</a>
+        <a href="sucursal3.html">Sucursal 3</a>
+      </div>
+    </div>
+
+    <a href="perfil.html">Perfil</a>
+    <a href="index.html">Cerrar sesión</a>
+  </div>
+</div>
+
+<!-- CONTENIDO -->
+<div class="container">
+  <h2>Sucursal 2</h2>
+  <p>Bienvenido a la Sucursal 2 de Cinema PHOVL</p>
+
+  <div class="calendar-container">
+
+    <button id="monthButton"></button>
+
+    <div class="week" id="weekDays"></div>
+
+    <div class="mini-calendar" id="miniCalendar">
+        <div class="mini-header">
+            <button id="prev">&lt;</button>
+            <span id="miniMonth"></span>
+            <button id="next">&gt;</button>
+        </div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
+</div>
+
+<h2 style="color:#f1e208;"> EN CARTELERA</h2>
+  <!-- PELÍCULA 1 -->
+  <div class="pelicula-card">
+    <img src="zootopia-2.jpg" />
+    <div class="info">
+      <h3>Zootopia 2</h3>
+      <p><strong>Clasificación: B</strong></p>
+      <p><strong>Duración:2 h 5 min</strong> </p>
+      <p><strong>Sinopsis: Judy Hoops y Nick Wilde regresan en una nueva aventura</strong> </p>
+<a href="https://youtu.be/J13BsdX7JZU?si=Tfv_UYrpMYsbM8O7" target="_blank">
+  <button style="
+    padding:6px 12px;
+    background:red;
+    color:white;
+    border:none;
+    font-weight:bold;
+    border-radius:6px;
+    cursor:pointer;
+    border:2px solid black;
+  ">Ver trailer</button>
+</a>
+
+      <div class="titulo-botones">Doblada</div>
+      <div class="botones-h">
+        <button onclick="irABoletosSucursal2('Zootopia 2','Doblada','12:00')">12:00</button>
+        <button onclick="irABoletosSucursal2('Zootopia 2','Doblada','15:40')">15:40</button>
+      </div>
+
+      <div class="titulo-botones">Subtitulada</div>
+      <div class="botones-h">
+        <button onclick="irABoletosSucursal2('Zootopia 2','Subtitulada','18:20')">18:20</button>
+        <button onclick="irABoletosSucursal2('Zootopia 2','Subtitulada','21:00')">21:00</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PELÍCULA 2 -->
+  <div class="pelicula-card">
+    <img src="King.jpg" />
+    <div class="info">
+      <h3>El rey de reyes</h3>
+      <p><strong>Clasificación: PG-13</PG-13></strong> </p>
+      <p><strong>Duración: 1 h 55 min</strong> </p>
+      <p><strong>Sinopsis: Un drama historico que revive la vida de Jesucristo.</strong></p>
+<a href="https://youtu.be/WDI2sD5snUU?si=9c2TT9TMe-Jbfjf2" target="_blank">
+  <button style="
+    padding:6px 12px;
+    background:red;
+    color:white;
+    border:none;
+    font-weight:bold;
+    border-radius:6px;
+    cursor:pointer;
+    border:2px solid black;
+  ">Ver trailer</button>
+</a>
+
+      <div class="titulo-botones">Doblada</div>
+      <div class="botones-h">
+        <button onclick="irABoletosSucursal2('El rey de reyes','Doblada','11:00')">11:00</button>
+        <button onclick="irABoletosSucursal2('El rey de reyes','Doblada','13:20')">13:20</button>
+      </div>
+
+      <div class="titulo-botones">Subtitulada</div>
+      <div class="botones-h">
+        <button onclick="irABoletosSucursal2('El rey de reyes','Subtitulada','17:10')">17:10</button>
+        <button onclick="irABoletosSucursal2('El rey de reyes','Subtitulada','19:40')">19:40</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PELÍCULA 3 -->
+  <div class="pelicula-card">
+    <img src="Barbie La Pelicula.jpg" />
+    <div class="info">
+      <h3>Barbie La Pelicula</h3>
+      <p><strong>Clasificación:</strong> PG-13</p>
+      <p><strong>Duración:</strong> 1h 54 min</p>
+      <p><strong>Sinopsis:</strong> Aventura fuera de Barbieland</p>
+<a href="https://youtu.be/zh4KhVSMwtQ?si=KEYBq3HYN_mONrbo" target="_blank">
+  <button style="
+    padding:6px 12px;
+    background:red;
+    color:white;
+    border:none;
+    font-weight:bold;
+    border-radius:6px;
+    cursor:pointer;
+    border:2px solid black;
+  ">Ver trailer</button>
+</a>
+
+      <div class="titulo-botones">Doblada</div>
+      <div class="botones-h">
+        <button onclick="irABoletosSucursal2('Barbie La Pelicula','Doblada','14:00')">14:00</button>
+        <button onclick="irABoletosSucursal2('Barbie La Pelicula','Doblada','16:30')">16:30</button>
+      </div>
+
+      <div class="titulo-botones">Subtitulada</div>
+      <div class="botones-h">
+        <button onclick="irABoletosSucursal2('Barbie La Pelicula','Subtitulada','19:10')">19:10</button>
+        <button onclick="irABoletosSucursal2('Barbie La Pelicula','Subtitulada','21:40')">21:40</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PELÍCULA 4 -->
+  <div class="pelicula-card">
+    <img src="Oppenheimer-828933592-large.jpg" />
+    <div class="info">
+      <h3>Oppenheimer</h3>
+      <p><strong>Clasificación:</strong> R</p>
+      <p><strong>Duración:</strong> 3h</p>
+      <p><strong>Sinopsis:</strong> Miles viaja entre universos enfrentando a una gran amenaza multiversal.</p>
+<a href="https://youtu.be/gMPEbJQun68?si=vZQ61cfpqsr85eRS" target="_blank">
+  <button style="
+    padding:6px 12px;
+    background:red;
+    color:white;
+    border:none;
+    font-weight:bold;
+    border-radius:6px;
+    cursor:pointer;
+    border:2px solid black;
+  ">Ver trailer</button>
+</a>
+
+      <div class="titulo-botones">Doblada</div>
+      <div class="botones-h">
+        <button onclick="irABoletosSucursal2('Oppenheimer','Doblada','10:00')">10:00</button>
+        <button onclick="irABoletosSucursal2('Oppenheimer','Doblada','12:45')">12:45</button>
+      </div>
+
+      <div class="titulo-botones">Subtitulada</div>
+      <div class="botones-h">
+        <button onclick="irABoletosSucursal2('Oppenheimer','Subtitulada','17:30')">17:30</button>
+        <button onclick="irABoletosSucursal2('Oppenheimer','Subtitulada','20:00')">20:00</button>
+
+      </div>
+    </div>
+  </div>
+
+ <h2 class="preventa-title">PREVENTA</h2>
+ 
+
+  <div class="pelicula-card preventa-card">
+  <img src="Silent h.jpg" />
+  <div class="info">
+    <h3>Return to Silent Hill</h3>
+    <p><strong>Clasificación:</strong> R</p>
+    <p><strong>Duración:</strong> 1 h 46 min</p>
+    <p><strong>Sinopsis:</strong> El protagonista, impulsado por una carta misteriosa, regresa al pueblo maldito de Silent Hill.</p>
+
+    <a href="https://youtu.be/cmC5LPmsHno?si=_I5Ig_9fILA4hUkt" target="_blank">
+      <button class="trailer-btn">Ver trailer</button>
+    </a>
+
+    <div class="titulo-botones">Doblada</div>
+    <div class="botones-h">
+      <button onclick="irABoletosSucursal2('Return to Silent Hill','Doblada','18:00')">18:00</button>
+    </div>
+
+    <div class="titulo-botones">Subtitulada</div>
+    <div class="botones-h">
+      <button onclick="irABoletosSucursal2('Return to Silent Hill','Subtitulada','20:30')">20:30</button>
+    </div>
+
+    <p style="margin-top:15px;color:#f1e208;font-weight:bold;">
+      Preventa activa desde el día 19
+    </p>
+  </div>
+</div>
+
+
+
+<script>
+  /* SIDEBAR */
+  const toggleLogo = document.getElementById("toggleMenu");
+  const menuItems = document.getElementById("menuItems");
+  const sidebarPanel = document.getElementById("sidebarPanel");
+
+  toggleLogo.addEventListener("click", () => {
+    menuItems.classList.toggle("hidden");
+    sidebarPanel.classList.toggle("collapsed");
+  });
+
+  const monthButton = document.getElementById("monthButton");
+    const weekDaysContainer = document.getElementById("weekDays");
+    const miniCalendar = document.getElementById("miniCalendar");
+    const miniMonth = document.getElementById("miniMonth");
+    const prev = document.getElementById("prev");
+    const next = document.getElementById("next");
+    const calendarGrid = document.getElementById("calendarGrid");
+
+    let selectedDate = new Date();
+    let currentMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    const maxLimit = new Date(today);
+    maxLimit.setDate(maxLimit.getDate() + 6);
+
+
+    const weekNames = ["DOM","LUN","MAR","MIÉ","JUE","VIE","SÁB"];
+
+    renderUI();
+
+    function renderUI(){
+        renderMonthTitle();
+        renderWeekDays();
+        renderCalendar();
+    }
+
+    function renderMonthTitle(){
+        monthButton.textContent = selectedDate.toLocaleDateString("es-MX",{month:"long", year:"numeric"}).toUpperCase();
+    }
+
+    function renderWeekDays(){
+    weekDaysContainer.innerHTML = "";
+
+    const startOfWeek = new Date(today); // empieza HOY
+
+    for(let i=0;i<7;i++){
+        const d = new Date(startOfWeek);
+        d.setDate(startOfWeek.getDate() + i);
+
+        const div = document.createElement("div");
+        div.className = "day";
+
+        if(d.toDateString() === selectedDate.toDateString()){
+            div.classList.add("selected");
+        }
+
+        div.innerHTML = `
+          <div style="font-size:16px;">${d.getDate()}</div>
+          <div style="font-size:13px;">${weekNames[d.getDay()]}</div>
+        `;
+
+        if(d > maxLimit || d < today){
+            div.classList.add("disabled");
+        } else {
+            div.onclick = ()=>{
+                selectDate(d);
+                currentMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+                renderUI();
+            };
+        }
+
+        weekDaysContainer.appendChild(div);
+    }
+}
+
+
+    function renderCalendar(){
+        calendarGrid.innerHTML = "";
+
+        miniMonth.textContent = currentMonth.toLocaleDateString("es-MX",{month:"long", year:"numeric"}).toUpperCase();
+
+        const firstDay = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), 1);
+        const start = firstDay.getDay();
+
+        for(let i=0;i<start;i++){
+            calendarGrid.appendChild(document.createElement("div"));
+        }
+
+        const daysInMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth()+1, 0).getDate();
+
+        for(let d=1; d<=daysInMonth; d++){
+            const date = new Date(currentMonth.getFullYear(), currentMonth.getMonth(), d);
+            const div = document.createElement("div");
+            div.textContent = d;
+
+            if(date > maxLimit || date < today){
+                div.classList.add("disabled");
+            }
+
+            if(date.toDateString() === selectedDate.toDateString()){
+                div.classList.add("selected-day");
+            }
+
+            div.onclick = ()=>{
+                selectDate(date);
+                currentMonth = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+                renderUI();
+            };
+
+            calendarGrid.appendChild(div);
+        }
+    }
+
+    function selectDate(date){
+        selectedDate = new Date(date);
+    }
+
+    monthButton.onclick =()=>{
+        miniCalendar.style.display = miniCalendar.style.display === "block" ? "none":"block";
+    };
+
+    prev.onclick =()=>{
+        currentMonth = new Date(currentMonth.getFullYear(), currentMonth.getMonth()-1, 1);
+        renderCalendar();
+    };
+
+    next.onclick =()=>{
+        const tentative = new Date(currentMonth.getFullYear(), currentMonth.getMonth()+1, 1);
+        if(tentative > maxLimit) return;
+        currentMonth = tentative;
+        renderCalendar();
+    };
+
+    function irABoletosSucursal2(pelicula, idioma, hora){
+    const fecha = obtenerFechaFuncion(pelicula);
+
+    window.location.href =
+        `pagina_boletos.html?pelicula=${encodeURIComponent(pelicula)}` +
+        `&idioma=${encodeURIComponent(idioma)}` +
+        `&hora=${encodeURIComponent(hora)}` +
+        `&fecha=${fecha}` +
+        `&sucursal=Sucursal 2`;
+}
+
+function obtenerFechaFuncion(pelicula){
+    // Preventa fija
+    if(pelicula === "Return to Silent Hill"){
+        return "2026-01-19";
+    }
+
+    // Usar la fecha seleccionada del calendario
+    if(selectedDate){
+        const year = selectedDate.getFullYear();
+        const month = String(selectedDate.getMonth() + 1).padStart(2, "0");
+        const day = String(selectedDate.getDate()).padStart(2, "0");
+        return `${year}-${month}-${day}`;
+    }
+
+    // Respaldo (hoy)
+    const hoy = new Date();
+    return hoy.toISOString().split("T")[0];
+}
+
+
+
+</script>
+
+</body>
+</html>

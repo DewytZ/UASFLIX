@@ -1,0 +1,198 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Perfil - Cinema PHOVL</title>
+
+  <style>
+    :root{
+      --morado:#3d0652;
+      --dorado:#f1e208;
+      --tarjeta:#4a0a69;
+      --texto:#ffffff;
+      --muted:#c7c7c7;
+      --radius:14px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+
+    body{
+      margin:0;
+      background: var(--morado);
+      color: var(--texto);
+    }
+
+    
+    header{
+      background: var(--dorado);
+      color:#000;
+      padding:12px 20px;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      font-weight:bold;
+    }
+
+    header .logo{
+      font-size:26px;
+      font-weight:900;
+      color:#000;
+    }
+
+    nav{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+
+    nav a{
+      color:#000;
+      text-decoration:none;
+      font-size:15px;
+      font-weight:700;
+      padding:6px 10px;
+      border-radius:8px;
+      transition:0.3s ease;
+    }
+
+    nav a:hover{
+      background:#000;
+      color:var(--dorado);
+    }
+
+    
+    .container{
+      max-width:850px;
+      margin:40px auto;
+      padding:20px;
+    }
+
+    h2{
+      text-align:center;
+      font-size:26px;
+      margin-bottom:20px;
+      color:var(--dorado);
+    }
+
+    .profile-card{
+      background: var(--tarjeta);
+      padding:25px;
+      border-radius:var(--radius);
+      box-shadow:0 0 18px rgba(0,0,0,0.25);
+      display:flex;
+      flex-direction:column;
+      gap:18px;
+    }
+
+    .profile-card h3{
+      margin:0;
+      font-size:20px;
+      font-weight:700;
+      color:var(--dorado);
+    }
+
+    .profile-card p{
+      margin:0;
+      font-size:16px;
+      color:var(--muted);
+    }
+
+    .history h4{
+      margin-bottom:6px;
+      font-size:18px;
+      color:var(--dorado);
+    }
+
+    .history ul{
+      list-style:none;
+      padding:0;
+    }
+
+    .history ul li{
+      background:#2a0242;
+      border-left:4px solid var(--dorado);
+      margin-bottom:6px;
+      padding:8px 12px;
+      border-radius:8px;
+      font-size:15px;
+    }
+
+    
+    .btn{
+      margin-top:10px;
+      align-self:center;
+      padding:10px 14px;
+      font-size:16px;
+      border:0;
+      background: var(--dorado);
+      color:#000;
+      font-weight:800;
+      border-radius:10px;
+      cursor:pointer;
+      transition:0.3s ease;
+    }
+
+    .btn:hover{
+      background:#000;
+      color:var(--dorado);
+      box-shadow:0 0 14px rgba(241, 226, 8, 0.6);
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="logo">🎬 Cinema PHOVL</div>
+
+    <nav>
+      <a href="index.html">Cerrar sesión</a>
+    </nav>
+  </header>
+
+  <div class="container">
+    <h2>Perfil de Usuario</h2>
+
+    <div class="profile-card">
+      <h3>Nombre de usuario:</h3>
+      <p id="username">Invitado</p>
+
+      <h3>Correo electrónico:</h3>
+      <p id="email">correo@ejemplo.com</p>
+
+      
+      <div class="history">
+        <h4>Historial de compras:</h4>
+        <ul id="purchase-history"></ul>
+      </div>
+
+      <button class="btn" onclick="location.href='Pagina Principal.html'">
+        Volver a la Página Principal
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* ---------------- CARGAR NOMBRE Y CORREO ---------------- */
+    const savedName = localStorage.getItem("registeredName");
+    const savedEmail = localStorage.getItem("registeredEmail");
+
+    document.getElementById("username").textContent = savedName || "Invitado";
+    document.getElementById("email").textContent = savedEmail || "correo@ejemplo.com";
+
+    /* ---------------- CARGAR HISTORIAL ---------------- */
+    const historyList = document.getElementById('purchase-history');
+    let cart = JSON.parse(localStorage.getItem('cart_s1')) || [];
+
+    if(cart.length === 0){
+      historyList.innerHTML = "<li>No hay compras registradas</li>";
+    } else {
+      cart.forEach(item => {
+        const li = document.createElement('li');
+        li.textContent = `${item.name} - $${item.price.toFixed(2)} MXN`;
+        historyList.appendChild(li);
+      });
+    }
+  </script>
+
+</body>
+</html>

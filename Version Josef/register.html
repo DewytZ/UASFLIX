@@ -1,0 +1,220 @@
+<!doctype html>
+<html lang="es">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Registro - Cinema PHOVOL</title>
+
+  <style>
+    :root {
+      --morado1: #3d0066;
+      --morado2: #24003d;
+      --morado3: #1a002b;
+      --dorado: #f6c90e;
+      --radius: 14px;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+      background: radial-gradient(circle at 20% 20%, var(--morado1), var(--morado2), var(--morado3));
+      background-attachment: fixed;
+      color: white;
+    }
+
+    .center-wrap {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    
+    .card {
+      background: transparent !important;
+      border: none !important;
+      box-shadow: none !important;
+      padding: 0;
+      width: 100%;
+      max-width: 420px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    
+    h1 {
+      margin: 0;
+      font-size: 50px;
+      color: var(--dorado);
+      text-transform: uppercase;
+      font-weight: 900;
+      letter-spacing: 2px;
+      -webkit-text-stroke: 2px black;
+    }
+
+   
+    h2.subtitle {
+      margin: 0;
+      font-size: 26px;
+      color: var(--dorado);
+      font-weight: 800;
+      text-transform: uppercase;
+      -webkit-text-stroke: 1.5px black;
+    }
+
+    /* TEXTO */
+    p.lead {
+      margin: 0;
+      font-size: 17px;
+      color: var(--dorado);
+      font-weight: 600;
+      text-align: justify;
+    }
+
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      width: 100%;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    label {
+      color: var(--dorado);
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    input {
+      padding: 12px;
+      border-radius: 8px;
+      border: 2px solid var(--dorado);
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      font-size: 15px;
+    }
+
+    input::placeholder {
+      color: #ffeaa7;
+      font-weight: bold;
+    }
+
+    .btn-primary {
+      margin-top: 8px;
+      padding: 12px;
+      background: var(--dorado);
+      color: black;
+      border: 2px solid black;
+      border-radius: 10px;
+      font-size: 17px;
+      font-weight: 800;
+      cursor: pointer;
+      text-transform: uppercase;
+    }
+
+    /* POPUP DE BIENVENIDA */
+    #welcomeBox {
+      position: fixed;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%) scale(0.6);
+      background: var(--morado3);
+      color: var(--dorado);
+      padding: 18px 26px;
+      border-radius: 14px;
+      font-size: 20px;
+      font-weight: 900;
+      border: 3px solid var(--dorado);
+      opacity: 0;
+      transition: 0.4s ease-in-out;
+      z-index: 9999;
+    }
+
+    #welcomeBox.show {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="welcomeBox"></div>
+
+  <div class="center-wrap">
+    <main class="card">
+
+      <h1>Cinema PHOVOL</h1>
+      <h2 class="subtitle">Registro</h2>
+      <p class="lead">Crea tu cuenta para comenzar a usar la plataforma.</p>
+
+      
+      <form onsubmit="handleRegister(event)">
+        <div class="form-group">
+          <label for="name">Nombre completo</label>
+          <input id="name" type="text" placeholder="Tu nombre completo" required>
+        </div>
+
+        <div class="form-group">
+          <label for="email">Correo electrónico</label>
+          <input id="email" type="email" placeholder="tu@ejemplo.com" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña</label>
+          <input id="password" type="password" placeholder="••••••••" required>
+        </div>
+
+        <div class="form-group">
+          <label for="confirmPassword">Confirmar contraseña</label>
+          <input id="confirmPassword" type="password" placeholder="••••••••" required>
+        </div>
+
+        <button class="btn-primary" type="submit">Crear cuenta</button>
+      </form>
+
+    </main>
+  </div>
+
+
+  <script>
+    function handleRegister(e) {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value;
+      const pass = document.getElementById('password').value;
+      const rep = document.getElementById('confirmPassword').value;
+
+      if (pass !== rep) {
+        alert("Las contraseñas no coinciden.");
+        return;
+      }
+
+      const box = document.getElementById('welcomeBox');
+      box.textContent = `Bienvenido a bordo ${name} al mero mero mole del cine en México`;
+      box.classList.add('show');
+
+      setTimeout(() => {
+        box.classList.remove('show');
+      }, 5000);
+
+      setTimeout(() => {
+        window.location.href = "index.html";
+      }, 5500);
+    }
+  </script>
+
+</body>
+
+</html>

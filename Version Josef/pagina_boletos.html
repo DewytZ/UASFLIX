@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Gestión de Boletos - Cinema PHOVL</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+  :root{
+    --bg:#3d0652;
+    --sidebar:#f1e208;
+    --radius:12px;
+    font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+  }
+
+  body{
+    margin:0;
+    background: var(--bg);
+    color:white;
+    display:flex;
+  }
+
+  .sidebar{
+    width:240px;
+    background:var(--sidebar);
+    color:black;
+    padding:20px 0;
+    display:flex;
+    flex-direction:column;
+    position:fixed;
+    top:0;
+    bottom:0;
+    left:0;
+    border-right:4px solid black;
+  }
+
+  .sidebar a{
+    padding:10px 20px;
+    display:block;
+    color:black;
+    font-weight:600;
+    text-decoration:none;
+  }
+
+  .sidebar a:hover{
+    background:#53004f;
+    color:var(--sidebar);
+  }
+
+  .container{
+    margin-left:260px;
+    padding:24px;
+    width:calc(100% - 260px);
+  }
+
+  h2{
+    text-align:center;
+    font-size:30px;
+    text-shadow:2px 2px 5px black;
+  }
+
+  .info-funcion{
+    display:flex;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:10px;
+    background:#2b043a;
+    border:2px solid #f1e208;
+    border-radius:12px;
+    padding:12px 18px;
+    margin-bottom:25px;
+    color:#f1e208;
+    font-weight:bold;
+    box-shadow:0 0 10px black;
+  }
+
+  .ticket-box{
+    background:#4b0a63;
+    width:60%;
+    margin:auto;
+    padding:25px;
+    border-radius:15px;
+    border:3px solid var(--sidebar);
+    box-shadow:0 0 10px black;
+  }
+
+  .ticket-section{
+    text-align:center;
+    margin-bottom:40px;
+  }
+
+  .ticket-title{
+    font-size:22px;
+    font-weight:bold;
+  }
+
+  .ticket-price{
+    opacity:0.8;
+  }
+
+  .ticket-subtotal{
+    margin-top:5px;
+    font-size:18px;
+    font-weight:bold;
+    color:#ffe97f;
+  }
+
+  .ticket-controls{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:25px;
+    margin-top:10px;
+  }
+
+  .arrow-btn{
+    font-size:30px;
+    background:var(--sidebar);
+    border:2px solid black;
+    border-radius:12px;
+    padding:8px 18px;
+    cursor:pointer;
+    font-weight:bold;
+  }
+
+  .ticket-value{
+    font-size:26px;
+    width:50px;
+    text-align:center;
+  }
+
+  .total{
+    text-align:center;
+    font-size:26px;
+    margin-bottom:20px;
+    font-weight:bold;
+    background:#3a074d;
+    border:2px solid var(--sidebar);
+    padding:10px;
+    border-radius:10px;
+  }
+
+  .btn-continuar{
+    width:100%;
+    padding:12px;
+    background:var(--sidebar);
+    border:none;
+    border-radius:10px;
+    font-size:18px;
+    font-weight:bold;
+    cursor:pointer;
+    border:2px solid black;
+  }
+</style>
+</head>
+
+<body>
+
+<div class="sidebar">
+  <a href="Pagina Principal.html">Inicio</a>
+  <a href="#" onclick="volverASucursal()">← Volver a Sucursal</a>
+</div>
+
+<div class="container">
+  <h2>Gestión de Boletos</h2>
+  <div id="infoFuncion" class="info-funcion"></div>
+
+  <div class="ticket-box">
+    <div id="total" class="total">$0 MXN</div>
+
+    <!-- BOLETOS -->
+    <div class="ticket-section">
+      <div class="ticket-title">Niños</div>
+      <div class="ticket-price">$55</div>
+      <div id="sub_ninos" class="ticket-subtotal"></div>
+      <div class="ticket-controls">
+        <button class="arrow-btn" onclick="cambiar('ninos',-1)">➖</button>
+        <span id="ninos" class="ticket-value">0</span>
+        <button class="arrow-btn" onclick="cambiar('ninos',1)">➕</button>
+      </div>
+    </div>
+
+    <div class="ticket-section">
+      <div class="ticket-title">Adultos</div>
+      <div class="ticket-price">$85</div>
+      <div id="sub_adultos" class="ticket-subtotal"></div>
+      <div class="ticket-controls">
+        <button class="arrow-btn" onclick="cambiar('adultos',-1)">➖</button>
+        <span id="adultos" class="ticket-value">0</span>
+        <button class="arrow-btn" onclick="cambiar('adultos',1)">➕</button>
+      </div>
+    </div>
+
+    <div class="ticket-section">
+      <div class="ticket-title">Estudiantes</div>
+      <div class="ticket-price">$65</div>
+      <div id="sub_estudiantes" class="ticket-subtotal"></div>
+      <div class="ticket-controls">
+        <button class="arrow-btn" onclick="cambiar('estudiantes',-1)">➖</button>
+        <span id="estudiantes" class="ticket-value">0</span>
+        <button class="arrow-btn" onclick="cambiar('estudiantes',1)">➕</button>
+      </div>
+    </div>
+
+    <div class="ticket-section">
+      <div class="ticket-title">Adultos Mayores</div>
+      <div class="ticket-price">$60</div>
+      <div id="sub_mayores" class="ticket-subtotal"></div>
+      <div class="ticket-controls">
+        <button class="arrow-btn" onclick="cambiar('mayores',-1)">➖</button>
+        <span id="mayores" class="ticket-value">0</span>
+        <button class="arrow-btn" onclick="cambiar('mayores',1)">➕</button>
+      </div>
+    </div>
+
+    <button class="btn-continuar" onclick="guardarBoletos()">Continuar a Selección de Asientos</button>
+  </div>
+</div>
+
+<script>
+/* ========= INFO FUNCIÓN ========= */
+const params = new URLSearchParams(window.location.search);
+
+let infoFuncion = {
+  sucursal: params.get("sucursal"),
+  pelicula: params.get("pelicula"),
+  idioma: params.get("idioma"),
+  hora: params.get("hora"),
+  fecha: params.get("fecha")
+};
+
+// Guardar si viene por URL
+if(infoFuncion.sucursal){
+  localStorage.setItem("infoFuncion", JSON.stringify(infoFuncion));
+} else {
+  infoFuncion = JSON.parse(localStorage.getItem("infoFuncion"));
+}
+
+// Mostrar info
+const info = document.getElementById("infoFuncion");
+if(infoFuncion){
+  const fechaBonita = new Date(infoFuncion.fecha + "T00:00").toLocaleDateString("es-MX",{
+    weekday:"long", day:"numeric", month:"long", year:"numeric"
+  });
+
+  info.innerHTML = `
+    <span>🏢 ${infoFuncion.sucursal}</span>
+    <span>🎬 ${infoFuncion.pelicula}</span>
+    <span>🕗 ${infoFuncion.hora}</span>
+    <span>🌎 ${infoFuncion.idioma}</span>
+    <span>📅 ${fechaBonita}</span>
+  `;
+}
+
+/* ========= BOLETOS ========= */
+const precios = { ninos:55, adultos:85, estudiantes:65, mayores:60 };
+const funcionID = `${infoFuncion.pelicula}_${infoFuncion.sucursal}_${infoFuncion.fecha}_${infoFuncion.hora}`;
+localStorage.setItem("funcionSeleccionada", funcionID);
+
+const datos = JSON.parse(localStorage.getItem("boletos_" + funcionID)) ||
+              { ninos:0, adultos:0, estudiantes:0, mayores:0 };
+
+["ninos","adultos","estudiantes","mayores"].forEach(id=>{
+  document.getElementById(id).textContent = datos[id];
+});
+
+function cambiar(id, v){
+  datos[id] = Math.max(0, datos[id] + v);
+  document.getElementById(id).textContent = datos[id];
+  actualizar();
+}
+
+function actualizar(){
+  document.getElementById("sub_ninos").textContent = `Subtotal: $${datos.ninos*precios.ninos}`;
+  document.getElementById("sub_adultos").textContent = `Subtotal: $${datos.adultos*precios.adultos}`;
+  document.getElementById("sub_estudiantes").textContent = `Subtotal: $${datos.estudiantes*precios.estudiantes}`;
+  document.getElementById("sub_mayores").textContent = `Subtotal: $${datos.mayores*precios.mayores}`;
+  document.getElementById("total").textContent =
+    `$${datos.ninos*55 + datos.adultos*85 + datos.estudiantes*65 + datos.mayores*60} MXN`;
+}
+
+function guardarBoletos(){
+  localStorage.setItem("boletos_" + funcionID, JSON.stringify(datos));
+  window.location.href = "seleccion_asientos.html";
+}
+
+function volverASucursal(){
+  // Intentar recuperar desde localStorage
+  const info = JSON.parse(localStorage.getItem("infoFuncion"));
+
+  if(info && info.sucursal){
+    // Extraer número de la sucursal (ej: "Sucursal 2" → "2")
+    const numero = info.sucursal.match(/\d+/);
+
+    if(numero){
+      window.location.href = `sucursal${numero[0]}.html`;
+      return;
+    }
+  }
+
+  // Fallback seguro
+  window.location.href = "Pagina Principal.html";
+}
+
+
+actualizar();
+</script>
+
+</body>
+</html>
