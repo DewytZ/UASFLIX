@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>UASFLIX</title>
+
+<style>
+
+:root{
+--amarillo:#FFD100;
+--azul:#0A1F44;
+}
+
+body{
+margin:0;
+font-family:Arial;
+background:var(--azul);
+color:white;
+}
+
+/* HEADER */
+
+header{
+font-family: system-ui;
+background:var(--azul);
+color:#001f4d;
+padding:15px;
+display:flex;
+align-items:center;
+justify-content:space-between;
+font-weight:bold;
+font-size:22px;
+}
+
+/* BUSCADOR */
+
+.search-box{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.search-box input{
+padding:6px;
+border-radius:5px;
+border:none;
+background-color: var(--amarillo);
+color: var(--azul);
+}
+
+.logo{
+padding-left: 40px;
+font-size: 28px;
+font-weight: 900;
+color: var(--amarillo);
+letter-spacing: 3px;
+}
+
+.search-box button{
+border-radius: 5px;
+background:var(--amarillo);
+color:white;
+border:none;
+padding:6px 10px;
+cursor:pointer;
+margin-right: 57px;
+}
+
+/* MENU */
+
+nav{
+background:#071632;
+padding:10px;
+display:flex;
+justify-content:center;
+gap:30px;
+flex-wrap:wrap;
+}
+
+nav button{
+background:transparent;
+color:white;
+border:none;
+font-weight:bold;
+cursor:pointer;
+}
+
+nav button:hover{
+color:var(--amarillo);
+}
+
+/* ABECEDARIO */
+
+.alphabet{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+justify-content:center;
+padding:15px;
+}
+
+.alphabet button{
+background:#071632;
+border:none;
+color:white;
+padding:6px 10px;
+cursor:pointer;
+border-radius:4px;
+}
+
+.alphabet button:hover{
+background:var(--amarillo);
+color:black;
+}
+
+/* GRID */
+
+.container{
+width:90%;
+margin:auto;
+}
+
+.movies-grid{
+display:grid;
+grid-template-columns:repeat(auto-fill,minmax(180px,1fr));
+gap:20px;
+margin-top:20px;
+}
+
+.movie{
+position:relative;
+cursor:pointer;
+}
+
+.movie img{
+width:100%;
+height:260px;
+object-fit:cover;
+border-radius:6px;
+}
+
+/* OVERLAY */
+
+.overlay{
+position:absolute;
+inset:0;
+background:rgba(0,0,0,.9);
+opacity:0;
+transition:.3s;
+padding:10px;
+font-size:14px;
+border-radius:6px;
+}
+
+.movie:hover .overlay{
+opacity:1;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">UASFLIX</div>
+
+<div class="search-box">
+<input type="text" id="searchInput" placeholder="Buscar película">
+<button onclick="searchMovie()">🔍</button>
+</div>
+
+</header>
+
+<nav>
+
+<button onclick="filterGenre('accion')">Acción</button>
+<button onclick="filterGenre('cienciaficcion')">Ciencia Ficción</button>
+<button onclick="filterGenre('animacion')">Animación</button>
+<button onclick="filterGenre('aventura')">Aventura</button>
+<button onclick="filterGenre('drama')">Drama</button>
+
+<button onclick="filterFaculty('ingenieria')">Ingeniería</button>
+<button onclick="filterFaculty('medicina')">Medicina</button>
+<button onclick="filterFaculty('derecho')">Derecho</button>
+
+<button onclick="showAll()">Todas</button>
+
+</nav>
+
+<!-- ABECEDARIO -->
+
+<div class="alphabet">
+
+<script>
+
+for(let i=65;i<=90;i++){
+document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${String.fromCharCode(i)}</button>`)
+}
+
+</script>
+
+</div>
+
+<div class="container">
+
+<div class="movies-grid" id="movies">
+
+<div class="movie" data-title="terminator" data-genre="cienciaficcion" data-faculty="ingenieria">
+<img src="img/terminator.jpg">
+<div class="overlay">
+<b>Terminator</b><br>
+<p>Un asesino cibernético del futuro es enviado a Los Ángeles para matar a la mujer que procreará a un líder.</p>
+</div>
+</div>
+
+<div class="movie" data-title="pan" data-genre="aventura" data-faculty="medicina">
+<img src="img/pan.jpg">
+<div class="overlay">
+<b>Pantheon</b>
+<p>Maddie, una adolescente constantemente acosada, comienza a recibir mensajes de un misterioso extraño que dice ser su padre recientemente fallecido, porque su conciencia fue subida a la nube después de un escáner cerebral experimental.</p>
+</div>
+</div>
+
+<div class="movie" data-title="2001 odisea del espacio" data-genre="cienciaficcion" data-faculty="ingenieria">
+<img src="img/2001.jpg">
+<div class="overlay">
+<b>2001: Odisea del Espacio</b>
+<p>La supercomputadora HAL 9000 guía a un equipo de tres astronautas en un viaje en el que buscan descubrir los orígenes de la humanidad.</p>
+</div>
+</div>
+
+<div class="movie" data-title="matrix" data-genre="cienciaficcion" data-faculty="ingenieria">
+<img src="img/matrix.jpg">
+<div class="overlay">
+<b>The Matrix</b>
+<p>Un experto en computadoras descubre que su mundo es una simulación total creada con maliciosas intenciones por parte de la ciberinteligencia.</p>
+</div>
+</div>
+
+<div class="movie" data-title="futurama" data-genre="animacion" data-faculty="medicina">
+<img src="img/futurama.jpg">
+<div class="overlay">
+<b>Futurama</b>
+<p>Accidentalmente el repartidor de pizza congelada, Fry se despierta 1000 años en el futuro, él es recibido por su único descendiente, un científico anciano y débil que es dueño de un servicio de despacho de carga.</p>
+</div>
+</div>
+
+<div class="movie" data-title="blade runner" data-genre="cienciaficcion" data-faculty="ingenieria">
+<img src="img/blade.jpg">
+<div class="overlay">
+<b>Blade Runner 2049</b>
+<p>En el año 2049 el oficial K, un nuevo replicante de la policía de Los Ángeles, emprende la búsqueda del replicante Rick Deckard, desaparecido 30 años antes. K piensa que en Deckard reside la clave que podría permitir salvar a la sociedad del caos en el que está inmersa.</p>
+</div>
+</div>
+
+<div class="movie" data-title="yo robot" data-genre="cienciaficcion" data-faculty="ingenieria">
+<img src="img/yo robot.jpg">
+<div class="overlay">
+<b>Yo, Robot</b>
+<p>En el 2035, un detective de homicidios de Chicago persigue a un sofisticado robot acusado de matar a un científico.</p>
+</div>
+</div>
+
+<div class="movie" data-title="avengers age of ultron" data-genre="accion" data-faculty="ingenieria">
+<img src="img/ultron.jpg">
+<div class="overlay">
+<b>Avengers: Age of Ultron</b>
+<p>Los Vengadores se reúnen de nuevo y juntan sus fuerzas con las de los recién llegados Quicksilver y Bruja Escarlata para luchar contra un robot maquiavélico llamado Ultrón, el cual Tony Stark creó con el fin de defender la paz, pero resultó defectuoso y ahora pretende exterminar a toda la humanidad.</p>
+</div>
+</div>
+
+<div class="movie" data-title="volver al futuro" data-genre="cienciaficcion" data-faculty="derecho">
+<img src="img/volver.jpg">
+<div class="overlay">
+<b>Volver al Futuro</b>
+<p>Una máquina del tiempo transporta a un adolescente a los años 50, cuando sus padres todavía estudiaban en la secundaria.</p>
+</div>
+</div>
+
+<div class="movie" data-title="fic" data-genre="drama" data-faculty="ingenieria">
+<img src="img/fic.jpg">
+<div class="overlay">
+<b>FIC</b>
+<p>Facultad de Informática Culiacán</p>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<script>
+
+function searchMovie(){
+
+let input=document.getElementById("searchInput").value.toLowerCase()
+let movies=document.querySelectorAll(".movie")
+
+movies.forEach(movie=>{
+
+let title=movie.dataset.title
+
+if(title.includes(input))
+movie.style.display="block"
+else
+movie.style.display="none"
+
+})
+
+}
+
+function filterLetter(letter){
+
+let movies=document.querySelectorAll(".movie")
+
+movies.forEach(movie=>{
+
+let title=movie.dataset.title.toUpperCase()
+
+if(title.startsWith(letter))
+movie.style.display="block"
+else
+movie.style.display="none"
+
+})
+
+}
+
+function filterGenre(genre){
+
+let movies=document.querySelectorAll(".movie")
+
+movies.forEach(movie=>{
+
+if(movie.dataset.genre==genre)
+movie.style.display="block"
+else
+movie.style.display="none"
+
+})
+
+}
+
+function filterFaculty(faculty){
+
+let movies=document.querySelectorAll(".movie")
+
+movies.forEach(movie=>{
+
+if(movie.dataset.faculty==faculty)
+movie.style.display="block"
+else
+movie.style.display="none"
+
+})
+
+}
+
+function showAll(){
+
+document.querySelectorAll(".movie").forEach(m=>m.style.display="block")
+
+}
+
+</script>
+
+</body>
+</html>

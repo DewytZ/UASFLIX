@@ -1,0 +1,473 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>UASFLIX</title>
+
+<style>
+:root {
+  --azul: #0A1F44;
+  --amarillo: #ffd100;
+  --blanco: #ffffff;
+  --header-height: 70px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: white;
+  background: black;
+}
+
+/* ===== HEADER ===== */
+header{
+font-family: system-ui;
+background:var(--azul);
+padding:15px;
+display:flex;
+justify-content: space-between;
+align-items:center;
+font-weight:bold;
+font-size:22px;
+}
+
+/* LOGO */
+.logo{
+margin: 0;
+padding-left: 40px;
+font-size: 28px;
+font-weight: 900;
+color: var(--amarillo);
+letter-spacing: 3px;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 15px; /* Espacio entre los dos botones */
+  margin-right: 40px;
+}
+
+.top-btn {
+  background: var(--amarillo);
+  color: black;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+.top-btn:hover { transform: scale(1.1); }
+
+/* ===== MAIN ===== */
+main {
+  position: relative;
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* ===== FONDO ===== */
+.background {
+  inset: 0;
+  z-index: 0;
+}
+
+.bg-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  animation: slideAnimation 44s infinite;
+}
+
+/* 11 PELICULAS */
+.bg-slide:nth-child(1){ background-image:url("img/fic.jpg"); animation-delay:0s; }
+.bg-slide:nth-child(2){ background-image:url("img/terminator.jpg"); animation-delay:4s; }
+.bg-slide:nth-child(3){ background-image:url("img/pan.jpg"); animation-delay:8s; }
+.bg-slide:nth-child(4){ background-image:url("img/2001.jpg"); animation-delay:12s; }
+.bg-slide:nth-child(5){ background-image:url("img/matrix.jpg"); animation-delay:16s; }
+.bg-slide:nth-child(6){ background-image:url("img/Oppenheimer.jpg"); animation-delay:20s; }
+.bg-slide:nth-child(7){ background-image:url("img/futurama.jpg"); animation-delay:24s; }
+.bg-slide:nth-child(8){ background-image:url("img/blade.jpg"); animation-delay:28s; }
+.bg-slide:nth-child(9){ background-image:url("img/yo robot.jpg"); animation-delay:32s; }
+.bg-slide:nth-child(10){ background-image:url("img/ultron.jpg"); animation-delay:36s; }
+.bg-slide:nth-child(11){ background-image:url("img/volver.jpg"); animation-delay:40s; }
+
+@keyframes slideAnimation {
+  0% { opacity: 0; transform: scale(1.05); }
+  8% { opacity: 1; transform: scale(1); }
+  30% { opacity: 1; }
+  38% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+/* ===== CARD ===== */
+.card {
+  position: relative;
+  z-index: 1;
+  background: rgba(0,0,0,0.65);
+  padding: 30px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+  transition: 0.3s ease;
+}
+
+.hidden { display: none; }
+
+h1 {
+  margin: 0;
+  font-size: 50px;
+  color: var(--amarillo);
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+
+.subtitle {
+  font-size: 13px;
+  opacity: 0.8;
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--amarillo);
+  font-weight: bold;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 2px solid var(--amarillo);
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+input:focus {
+  outline: none;
+  box-shadow: 0 0 10px var(--amarillo);
+}
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background: var(--amarillo);
+  border: none;
+  color: black;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background: var(--azul);
+  color: var(--blanco);
+  padding: 30px 60px 15px;
+}
+
+.footer-container {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-left {
+  max-width: 350px;
+}
+
+.footer-left h3 {
+  margin: 0;
+  font-size: 20px;
+  color: var(--amarillo);
+}
+
+.footer-left p {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.footer-logo img {
+  width: 90px;
+}
+
+.footer-links {
+  display: flex;
+  gap: 70px;
+  margin-left: auto;
+}
+
+.links-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-links a {
+  text-decoration: none;
+  color: var(--blanco);
+  font-size: 13px;
+  margin-bottom: 6px;
+  transition: 0.3s;
+}
+
+.footer-links a:hover {
+  color: var(--amarillo);
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(255,255,255,0.3);
+  margin-top: 20px;
+  padding-top: 10px;
+  font-size: 12px;
+  text-align: center;
+}
+
+/* POPUP */
+#welcomeBox {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.6);
+  background: #111;
+  color: var(--amarillo);
+  padding: 18px 26px;
+  border-radius: 14px;
+  font-size: 18px;
+  font-weight: bold;
+  border: 3px solid var(--amarillo);
+  opacity: 0;
+  transition: 0.4s;
+  z-index: 9999;
+}
+
+#welcomeBox.show {
+  opacity: 1;
+  transform: translateX(-50%) scale(1);
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <h1 class="logo">UASFLIX</h1>
+  
+  <div class="header-buttons">
+    <button class="top-btn" onclick="showLogin()">Iniciar sesión</button>
+    <button class="top-btn" onclick="showRegister()">Registro</button>
+  </div>
+</header>
+
+<main>
+
+<div class="background">
+  <div class="bg-slide"></div>
+  <div class="bg-slide"></div>
+  <div class="bg-slide"></div>
+  <div class="bg-slide"></div>
+  <div class="bg-slide"></div>
+  <div class="bg-slide"></div>
+  <div class="bg-slide"></div>
+  <div class="bg-slide"></div>
+  <div class="bg-slide"></div>
+  <div class="bg-slide"></div>
+  <div class="bg-slide"></div>
+</div>
+
+<!-- LOGIN -->
+<div class="card hidden" id="loginBox">
+<h1>UASFLIX</h1>
+<p class="subtitle">
+Disfruta del mejor contenido cinematografico que un universitario pudiera desear.
+</p>
+
+<form onsubmit="handleLogin(event)">
+<label>Correo electrónico</label>
+<input type="email" id="loginEmail" pattern=".+@info\.uas\.edu\.mx" required>
+
+<label>Contraseña</label>
+<input type="password" required>
+
+<button class="btn btn-primary" type="submit">Iniciar sesión</button>
+</form>
+</div>
+
+<!-- REGISTRO -->
+<div class="card hidden" id="registerBox">
+
+<h1>Registro</h1>
+
+<p class="subtitle">
+Crea tu cuenta para comenzar a usar la plataforma.
+</p>
+
+<form onsubmit="handleRegister(event)">
+
+<label>Nombre completo</label>
+<input id="name" type="text" required>
+
+<label>Correo electrónico</label>
+<input id="email" type="email" pattern=".+@info\.uas\.edu\.mx" required>
+
+<label>Contraseña</label>
+<input id="password" type="password" required>
+
+<label>Confirmar contraseña</label>
+<input id="confirmPassword" type="password" required>
+
+<button class="btn btn-primary" type="submit">
+Crear cuenta
+</button>
+
+</form>
+</div>
+
+</main>
+
+<div id="welcomeBox"></div>
+
+<footer>
+
+<div class="footer-container">
+
+<div class="footer-left">
+<h3>UASFLIX</h3>
+
+<p>
+Plataforma oficial de entretenimiento de la Universidad Autónoma de Sinaloa.
+Contenido exclusivo para la comunidad universitaria.
+Desarrollado por estudiantes de la FIC.
+</p>
+</div>
+
+<div class="footer-logo" style="display:flex;gap:15px;align-items:center;">
+<img src="img/FIC.png">
+<img src="img/logo uas.png">
+</div>
+
+<div class="footer-links">
+
+<div class="links-column">
+<a href="#">Inicio</a>
+<a href="#">Catálogo</a>
+<a href="#">Categorías</a>
+<a href="#">Novedades</a>
+</div>
+
+<div class="links-column">
+<a href="#">Acerca de</a>
+<a href="#">Política de Privacidad</a>
+<a href="#">Términos</a>
+<a href="#">Contacto</a>
+</div>
+
+</div>
+
+</div>
+
+<div class="footer-bottom">
+© 2026 Universidad Autónoma de Sinaloa - UASFLIX
+</div>
+
+</footer>
+
+<script>
+
+function showLogin(){
+document.getElementById("loginBox").classList.toggle("hidden");
+document.getElementById("registerBox").classList.add("hidden");
+}
+
+function showRegister(){
+document.getElementById("registerBox").classList.toggle("hidden");
+document.getElementById("loginBox").classList.add("hidden");
+}
+
+function isInstitutionalEmail(email){
+const pattern=/^[a-zA-Z0-9._%+-]+@info\.uas\.edu\.mx$/;
+return pattern.test(email);
+}
+
+function handleLogin(e){
+e.preventDefault();
+
+const email=document.getElementById("loginEmail").value;
+
+if(!isInstitutionalEmail(email)){
+alert("Solo correos institucionales UAS.");
+return;
+}
+
+window.location.href="pagina-principal.html";
+}
+
+function handleRegister(e){
+
+e.preventDefault();
+
+const name=document.getElementById('name').value;
+const email=document.getElementById('email').value;
+const pass=document.getElementById('password').value;
+const rep=document.getElementById('confirmPassword').value;
+
+if(!isInstitutionalEmail(email)){
+alert("Solo correos institucionales.");
+return;
+}
+
+if(pass!==rep){
+alert("Las contraseñas no coinciden.");
+return;
+}
+
+const box=document.getElementById('welcomeBox');
+
+box.textContent=`Bienvenido ${name} a UASFLIX 🎬`;
+
+box.classList.add('show');
+
+setTimeout(()=>{
+box.classList.remove('show');
+},4000);
+
+setTimeout(()=>{
+document.getElementById("registerBox").classList.add("hidden");
+document.getElementById("loginBox").classList.remove("hidden");
+},4500);
+
+}
+
+</script>
+
+</body>
+</html>
