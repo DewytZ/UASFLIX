@@ -46,6 +46,8 @@ gap:10px;
 padding:6px;
 border-radius:5px;
 border:none;
+background-color: var(--amarillo);
+color: var(--azul);
 }
 
 .logo{
@@ -58,11 +60,12 @@ letter-spacing: 3px;
 
 .search-box button{
 border-radius: 5px;
-background:white;
+background:var(--amarillo);
 color:white;
 border:none;
 padding:6px 10px;
 cursor:pointer;
+margin-right: 57px;
 }
 
 /* MENU */
@@ -206,7 +209,7 @@ document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${St
 <div class="movies-grid" id="movies">
 
 <div class="movie" data-title="terminator" data-genre="cienciaficcion" data-faculty="ingenieria">
-<img src="terminator.jpg">
+<img src="img/terminator.jpg">
 <div class="overlay">
 <b>Terminator</b><br>
 <p>Un asesino cibernético del futuro es enviado a Los Ángeles para matar a la mujer que procreará a un líder.</p>
@@ -214,7 +217,7 @@ document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${St
 </div>
 
 <div class="movie" data-title="pan" data-genre="aventura" data-faculty="medicina">
-<img src="pan.jpg">
+<img src="img/pan.jpg">
 <div class="overlay">
 <b>Pantheon</b>
 <p>Maddie, una adolescente constantemente acosada, comienza a recibir mensajes de un misterioso extraño que dice ser su padre recientemente fallecido, porque su conciencia fue subida a la nube después de un escáner cerebral experimental.</p>
@@ -222,7 +225,7 @@ document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${St
 </div>
 
 <div class="movie" data-title="2001 odisea del espacio" data-genre="cienciaficcion" data-faculty="ingenieria">
-<img src="2001.jpg">
+<img src="img/2001.jpg">
 <div class="overlay">
 <b>2001: Odisea del Espacio</b>
 <p>La supercomputadora HAL 9000 guía a un equipo de tres astronautas en un viaje en el que buscan descubrir los orígenes de la humanidad.</p>
@@ -230,7 +233,7 @@ document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${St
 </div>
 
 <div class="movie" data-title="matrix" data-genre="cienciaficcion" data-faculty="ingenieria">
-<img src="matrix.jpg">
+<img src="img/matrix.jpg">
 <div class="overlay">
 <b>The Matrix</b>
 <p>Un experto en computadoras descubre que su mundo es una simulación total creada con maliciosas intenciones por parte de la ciberinteligencia.</p>
@@ -238,7 +241,7 @@ document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${St
 </div>
 
 <div class="movie" data-title="futurama" data-genre="animacion" data-faculty="medicina">
-<img src="futurama.jpg">
+<img src="img/futurama.jpg">
 <div class="overlay">
 <b>Futurama</b>
 <p>Accidentalmente el repartidor de pizza congelada, Fry se despierta 1000 años en el futuro, él es recibido por su único descendiente, un científico anciano y débil que es dueño de un servicio de despacho de carga.</p>
@@ -246,7 +249,7 @@ document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${St
 </div>
 
 <div class="movie" data-title="blade runner" data-genre="cienciaficcion" data-faculty="ingenieria">
-<img src="blade.jpg">
+<img src="img/blade.jpg">
 <div class="overlay">
 <b>Blade Runner 2049</b>
 <p>En el año 2049 el oficial K, un nuevo replicante de la policía de Los Ángeles, emprende la búsqueda del replicante Rick Deckard, desaparecido 30 años antes. K piensa que en Deckard reside la clave que podría permitir salvar a la sociedad del caos en el que está inmersa.</p>
@@ -254,7 +257,7 @@ document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${St
 </div>
 
 <div class="movie" data-title="yo robot" data-genre="cienciaficcion" data-faculty="ingenieria">
-<img src="yo robot.jpg">
+<img src="img/yo robot.jpg">
 <div class="overlay">
 <b>Yo, Robot</b>
 <p>En el 2035, un detective de homicidios de Chicago persigue a un sofisticado robot acusado de matar a un científico.</p>
@@ -262,7 +265,7 @@ document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${St
 </div>
 
 <div class="movie" data-title="avengers age of ultron" data-genre="accion" data-faculty="ingenieria">
-<img src="ultron.jpg">
+<img src="img/ultron.jpg">
 <div class="overlay">
 <b>Avengers: Age of Ultron</b>
 <p>Los Vengadores se reúnen de nuevo y juntan sus fuerzas con las de los recién llegados Quicksilver y Bruja Escarlata para luchar contra un robot maquiavélico llamado Ultrón, el cual Tony Stark creó con el fin de defender la paz, pero resultó defectuoso y ahora pretende exterminar a toda la humanidad.</p>
@@ -270,7 +273,7 @@ document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${St
 </div>
 
 <div class="movie" data-title="volver al futuro" data-genre="cienciaficcion" data-faculty="derecho">
-<img src="volver.jpg">
+<img src="img/volver.jpg">
 <div class="overlay">
 <b>Volver al Futuro</b>
 <p>Una máquina del tiempo transporta a un adolescente a los años 50, cuando sus padres todavía estudiaban en la secundaria.</p>
@@ -278,7 +281,7 @@ document.write(`<button onclick="filterLetter('${String.fromCharCode(i)}')">${St
 </div>
 
 <div class="movie" data-title="fic" data-genre="drama" data-faculty="ingenieria">
-<img src="fic.jpg">
+<img src="img/fic.jpg">
 <div class="overlay">
 <b>FIC</b>
 <p>Facultad de Informática Culiacán</p>
