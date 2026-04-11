@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Perfil UASFlix</title>
+
+<style>
+:root {
+    --azul: #0a2a66;
+    --azul-marino: #0b1f3a;
+    --dorado: #ffd700;
+    --blanco: #ffffff;
+}
+
+body {
+    margin: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: var(--azul-marino);
+}
+
+/* HEADER */
+header {
+    background: var(--azul);
+    color: white;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo span {
+    color: var(--dorado);
+}
+
+/* BOTON LOGOUT */
+.btn-logout {
+    background: var(--dorado);
+    color: black;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+/* CONTENEDOR */
+.container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+/* TARJETA */
+.card {
+    background: white;
+    width: 500px;
+    border-radius: 15px;
+    border: 4px solid var(--dorado); /* 👈 CONTORNO AMARILLO */
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+    overflow: hidden;
+}
+
+/* HEADER PERFIL */
+.card-header {
+    background: var(--azul);
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+.card-header img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    border: 4px solid var(--dorado);
+}
+
+/* INFO */
+.card-body {
+    padding: 25px;
+}
+
+.info {
+    margin-bottom: 15px;
+}
+
+.info label {
+    font-weight: bold;
+    color: var(--azul);
+    display: block;
+}
+
+/* INPUTS */
+.info input {
+    width: 100%;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* BOTONES */
+.actions {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
+    font-weight: bold;
+}
+
+.btn-edit {
+    background: var(--dorado);
+    color: black;
+}
+
+.btn-historial {
+    background: var(--azul);
+    color: white;
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="logo">UAS<span>Flix</span> | Perfil</div>
+    <button class="btn-logout" onclick="cerrarSesion()">Cerrar sesión</button>
+</header>
+
+<div class="container">
+    <div class="card">
+
+        <div class="card-header">
+            <img id="fotoUsuario" src="https://via.placeholder.com/150">
+            <h2 id="nombreUsuario">Nombre del Alumno</h2>
+        </div>
+
+        <div class="card-body">
+
+            <div class="info">
+                <label>Nombre</label>
+                <input id="nombre" disabled>
+            </div>
+
+            <div class="info">
+                <label>Matrícula</label>
+                <input id="matricula" disabled>
+            </div>
+
+            <div class="info">
+                <label>Correo</label>
+                <input id="email" disabled>
+            </div>
+
+            <div class="info">
+                <label>Carrera</label>
+                <input id="carrera" disabled>
+            </div>
+
+            <div class="info">
+                <label>Grupo</label>
+                <input id="grupo" disabled>
+            </div>
+
+            <div class="actions">
+                <button class="btn btn-edit" onclick="editarPerfil()" id="btnEditar">Editar Perfil</button>
+                <button class="btn btn-historial">Historial</button>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+<script>
+let editando = false;
+
+const usuario = {
+    nombre: "Nombre del Alumno",
+    matricula: "123456",
+    email: "alumno@uas.edu.mx",
+    carrera: "Ingeniería en Software",
+    grupo: "4-1",
+};
+
+// cargar datos
+document.getElementById("nombre").value = usuario.nombre;
+document.getElementById("matricula").value = usuario.matricula;
+document.getElementById("email").value = usuario.email;
+document.getElementById("carrera").value = usuario.carrera;
+document.getElementById("grupo").value = usuario.grupo;
+
+function editarPerfil() {
+    const inputs = document.querySelectorAll("input");
+    const btn = document.getElementById("btnEditar");
+
+    editando = !editando;
+
+    inputs.forEach(input => {
+        input.disabled = !editando;
+    });
+
+    if (editando) {
+        btn.textContent = "Guardar";
+    } else {
+        btn.textContent = "Editar Perfil";
+
+        // aquí podrías guardar en backend o localStorage
+        alert("Datos guardados");
+    }
+}
+
+function cerrarSesion() {
+    alert("Sesión cerrada");
+    window.location.href = "index.html";
+}
+</script>
+
+</body>
+</html>
