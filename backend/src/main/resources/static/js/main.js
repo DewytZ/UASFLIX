@@ -21,9 +21,7 @@ async function cargarPeliculas(facultad = "") {
     if (!grid) return;
 
     // Si pasamos facultad, usamos el endpoint de filtro, si no, traemos todas
-    const url = facultad 
-        ? `http://localhost:8080/api/movies/faculty/${facultad}`
-        : "http://localhost:8080/api/movies";
+    const url = facultad ? "/api/movies/faculty/" + facultad : "/api/movies";
 
     console.log("Pidiendo datos a: " + url);
 

@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     // 2. Cargar datos de la película desde el Backend
     try {
-        const response = await fetch(`http://localhost:8080/api/movies/${movieId}`);
+        const response = await fetch("/api/movies/" + movieId);
         if (!response.ok) throw new Error("Pelicula no encontrada");
         
         const peli = await response.json();
