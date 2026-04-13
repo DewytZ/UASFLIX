@@ -1,0 +1,166 @@
+:root {
+  --azul: #0A1F44;
+  --amarillo: #ffd100;
+  --blanco: #ffffff;
+  --header-height: 70px;
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  color: white;
+  background: black;
+}
+
+/* ===== HEADER ===== */
+header {
+  font-family: system-ui;
+  background: var(--azul);
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  font-size: 22px;
+}
+
+.logo {
+  margin: 0;
+  padding-left: 40px;
+  font-size: 28px;
+  font-weight: 900;
+  color: var(--amarillo);
+  letter-spacing: 3px;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 15px;
+  margin-right: 40px;
+}
+
+.top-btn {
+  background: var(--amarillo);
+  color: black;
+  border: none;
+  padding: 8px 18px;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.top-btn:hover { transform: scale(1.1); }
+
+/* ===== FONDO ANIMADO ===== */
+main {
+  position: relative;
+  min-height: calc(100vh - var(--header-height));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.background { inset: 0; z-index: 0; }
+
+.bg-slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  animation: slideAnimation 44s infinite;
+}
+
+/* Ajuste de rutas para las imágenes (asumiendo que están en la carpeta img) */
+.bg-slide:nth-child(1){ background-image:url("../img/fic.jpg"); animation-delay:0s; }
+.bg-slide:nth-child(2){ background-image:url("../img/terminator.jpg"); animation-delay:4s; }
+.bg-slide:nth-child(3){ background-image:url("../img/pan.jpg"); animation-delay:8s; }
+.bg-slide:nth-child(4){ background-image:url("../img/2001.jpg"); animation-delay:12s; }
+.bg-slide:nth-child(5){ background-image:url("../img/matrix.jpg"); animation-delay:16s; }
+.bg-slide:nth-child(6){ background-image:url("../img/Oppenheimer.jpg"); animation-delay:20s; }
+.bg-slide:nth-child(7){ background-image:url("../img/futurama.jpg"); animation-delay:24s; }
+.bg-slide:nth-child(8){ background-image:url("../img/blade.jpg"); animation-delay:28s; }
+.bg-slide:nth-child(9){ background-image:url("../img/yo robot.jpg"); animation-delay:32s; }
+.bg-slide:nth-child(10){ background-image:url("../img/ultron.jpg"); animation-delay:36s; }
+.bg-slide:nth-child(11){ background-image:url("../img/volver.jpg"); animation-delay:40s; }
+
+@keyframes slideAnimation {
+  0% { opacity: 0; transform: scale(1.05); }
+  8% { opacity: 1; transform: scale(1); }
+  30% { opacity: 1; }
+  38% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+.background::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+}
+
+/* ===== TARJETAS (CARDS) ===== */
+.card {
+  position: relative;
+  z-index: 1;
+  background: rgba(0,0,0,0.65);
+  padding: 30px;
+  border-radius: 14px;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  backdrop-filter: blur(8px);
+}
+
+.hidden { display: none; }
+
+h1 { font-size: 50px; color: var(--amarillo); font-weight: 900; }
+.subtitle { font-size: 13px; opacity: 0.8; margin-bottom: 20px; }
+
+label { display: block; margin-bottom: 5px; color: var(--amarillo); font-weight: bold; text-align: left; }
+
+input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 2px solid var(--amarillo);
+  background: rgba(255,255,255,0.1);
+  color: white;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 12px;
+  background: var(--amarillo);
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+/* POPUP BIENVENIDA */
+#welcomeBox {
+  position: fixed;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%) scale(0.6);
+  background: #111;
+  color: var(--amarillo);
+  padding: 18px 26px;
+  border-radius: 14px;
+  font-weight: bold;
+  border: 3px solid var(--amarillo);
+  opacity: 0;
+  transition: 0.4s;
+  z-index: 9999;
+}
+
+#welcomeBox.show { opacity: 1; transform: translateX(-50%) scale(1); }
+
+/* FOOTER */
+footer { background: var(--azul); padding: 30px 60px; text-align: center; font-size: 13px; }

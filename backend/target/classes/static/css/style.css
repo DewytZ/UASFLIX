@@ -1,0 +1,158 @@
+:root {
+    --amarillo: #FFD100;
+    --azul: #0A1F44;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background: var(--azul);
+    color: white;
+}
+
+/* HEADER */
+header {
+    font-family: system-ui;
+    background: var(--azul);
+    color: #001f4d;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: bold;
+    font-size: 22px;
+}
+
+.logo {
+    padding-left: 40px;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--amarillo);
+    letter-spacing: 3px;
+}
+
+/* BUSCADOR */
+.search-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.search-box input {
+    padding: 6px;
+    border-radius: 5px;
+    border: none;
+    background-color: var(--amarillo);
+    color: var(--azul);
+}
+
+.search-box button {
+    border-radius: 5px;
+    background: var(--amarillo);
+    color: white;
+    border: none;
+    padding: 6px 10px;
+    cursor: pointer;
+    margin-right: 57px;
+}
+
+/* MENU */
+nav {
+    background: #071632;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+nav button {
+    background: transparent;
+    color: white;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+nav button:hover {
+    color: var(--amarillo);
+}
+
+/* ABECEDARIO */
+.alphabet {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    padding: 15px;
+}
+
+.alphabet button {
+    background: #071632;
+    border: none;
+    color: white;
+    padding: 6px 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.alphabet button:hover {
+    background: var(--amarillo);
+    color: black;
+}
+
+/* GRID */
+.container {
+    width: 90%;
+    margin: auto;
+}
+
+.movies-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    margin: 20px;
+}
+
+.movie {
+    position: relative;
+    cursor: pointer;
+}
+
+.movie img {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+/* OVERLAY */
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .9);
+    opacity: 0;
+    transition: .3s;
+    padding: 10px;
+    font-size: 14px;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+}
+
+.movie:hover .overlay {
+    opacity: 1;
+}
+
+.overlay button {
+    background: var(--amarillo);
+    border: none;
+    padding: 5px;
+    margin-top: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 4px;
+}
