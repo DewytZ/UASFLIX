@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UASFLIX - Reproductor</title>
+    <link rel="stylesheet" href="css/video.css">
+</head>
+<body>
+
+<header>
+    <div class="logo" onclick="window.location.href='Pagina principal.html'" style="cursor:pointer">UASFLIX</div>
+    <button class="theme-btn" onclick="toggleTheme()">Cambiar Tema</button>
+</header>
+
+<div class="video-wrapper">
+    <div class="info-panel" id="infoPanel">
+        <h3 id="movie-title">Cargando...</h3>
+        <p><b>Descripción:</b> <span id="movie-desc">Cargando descripción...</span></p>
+        <p><b>Facultad:</b> <span id="movie-faculty">...</span></p>
+        <p><b>Calificación media:</b> <span id="avg">0</span> ⭐</p>
+    </div>
+
+    <div class="video-container">
+        <iframe id="video-frame" src="" frameborder="0" allowfullscreen></iframe>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Califica esta película</h2>
+    <div class="stars" id="stars">
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+        <span class="star">★</span>
+    </div>
+
+    <h2>Comentarios</h2>
+    <textarea id="commentInput" placeholder="Escribe tu opinión..."></textarea>
+    <button class="publish-btn" onclick="addComment()">Publicar Comentario</button>
+
+    <div id="commentList"></div>
+</div>
+
+<script src="js/video.js"></script>
+
+</body>
+</html>

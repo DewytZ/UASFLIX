@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>UASFLIX - Login</title>
+    <link rel="stylesheet" href="css/login.css">
+</head>
+
+<body>
+
+<header>
+    <h1 class="logo">UASFLIX</h1>
+    <div class="header-buttons">
+        <button class="top-btn" onclick="showLogin()">Iniciar sesión</button>
+        <button class="top-btn" onclick="showRegister()">Registro</button>
+    </div>
+</header>
+
+<main>
+    <div class="background">
+        <div class="bg-slide"></div><div class="bg-slide"></div>
+        <div class="bg-slide"></div><div class="bg-slide"></div>
+        <div class="bg-slide"></div><div class="bg-slide"></div>
+        <div class="bg-slide"></div><div class="bg-slide"></div>
+        <div class="bg-slide"></div><div class="bg-slide"></div>
+        <div class="bg-slide"></div>
+    </div>
+
+    <div class="card hidden" id="loginBox">
+        <h1>UASFLIX</h1>
+        <p class="subtitle">Disfruta del mejor contenido cinematográfico universitario.</p>
+        <form onsubmit="handleLogin(event)">
+            <label>Correo electrónico</label>
+            <input type="email" id="loginEmail" placeholder="usuario@info.uas.edu.mx" required>
+            <label>Contraseña</label>
+            <input type="password" required>
+            <button class="btn btn-primary" type="submit">Iniciar sesión</button>
+        </form>
+    </div>
+
+    <div class="card hidden" id="registerBox">
+        <h1>Registro</h1>
+        <p class="subtitle">Crea tu cuenta institucional para comenzar.</p>
+        <form onsubmit="handleRegister(event)">
+            <label>Nombre completo</label>
+            <input id="name" type="text" required>
+            <label>Correo electrónico</label>
+            <input id="email" type="email" placeholder="usuario@info.uas.edu.mx" required>
+            <label>Contraseña</label>
+            <input id="password" type="password" required>
+            <label>Confirmar contraseña</label>
+            <input id="confirmpassword" type="password" required>
+            <button class="btn btn-primary" type="submit">Crear cuenta</button>
+        </form>
+    </div>
+</main>
+
+<div id="welcomeBox"></div>
+
+<footer>
+    <div class="footer-container">
+        <div class="footer-left">
+            <h3>UASFLIX</h3>
+            <p>Plataforma oficial de la Universidad Autónoma de Sinaloa. FIC.</p>
+        </div>
+        <div class="footer-logo" style="display:flex;gap:15px;align-items:center;">
+            <img src="img/FIC.png" alt="FIC">
+            <img src="img/logo uas.png" alt="UAS">
+        </div>
+    </div>
+    <div class="footer-bottom">© 2026 Universidad Autónoma de Sinaloa - UASFLIX</div>
+</footer>
+
+<script src="js/login.js"></script>
+
+</body>
+</html>
