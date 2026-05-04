@@ -21,18 +21,23 @@ public class UserController {
 
     @PostMapping("/register") 
     public ResponseEntity<String> registerUser(@RequestBody User user) {
+    String email = user.getEmail().toLowerCase();
+
+    // 3 dominios de la UAS
+    if (!email.endsWith("@info.uas.edu.mx") && 
+        !email.endsWith("@ms.uas.edu.mx") && 
+        !email.endsWith("@uas.edu.mx")) {
         
-        if (!user.getEmail().endsWith("@info.uas.edu.mx")) {
-            return ResponseEntity.badRequest().body("Dominio no permitido.");
-        }
-
-        if (userRepository.existsByEmail(user.getEmail())) {
-            return ResponseEntity.badRequest().body("El correo ya está registrado.");
-        }
-
-        userRepository.save(user);
-        return ResponseEntity.ok("Usuario registrado con éxito.");
+        return ResponseEntity.badRequest().body("Dominio de correo no permitido. Usa tu cuenta institucional.");
     }
+
+    if (userRepository.existsByEmail(email)) {
+        return ResponseEntity.badRequest().body("El correo ya está registrado.");
+    }
+
+    userRepository.save(user);
+    return ResponseEntity.ok("Usuario registrado con éxito.");
+}
 
     // EL ERROR ESTABA AQUÍ: El método debe estar ANTES de la última llave de la clase
     @PostMapping("/login")
