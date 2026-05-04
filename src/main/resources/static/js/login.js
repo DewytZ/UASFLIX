@@ -11,7 +11,7 @@ function showRegister() {
 
 // Validar que el correo sea @info.uas.edu.mx
 function isInstitutionalEmail(email) {
-    const pattern = /^[a-zA-Z0-9._%+-]+@info\.uas\.edu\.mx$/;
+    const pattern = /^[a-zA-Z0-9._%+-]+@(info\.uas\.edu\.mx|ms\.uas\.edu\.mx|uas\.edu\.mx)$/;
     return pattern.test(email);
 }
 
@@ -26,7 +26,7 @@ async function handleRegister(e) {
 
     // 1. Validar correo institucional
     if (!isInstitutionalEmail(email)) {
-        alert("¡Error! Debes usar un correo @info.uas.edu.mx");
+        alert("¡Error! Debes usar un correo institucional válido (@info.uas.edu.mx, @ms.uas.edu.mx o @uas.edu.mx)");
         return;
     }
 
