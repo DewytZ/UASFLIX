@@ -98,3 +98,57 @@ function mostrarMensajeBienvenida(name) {
         showLogin(); // Regresar al login después de registrarse
     }, 4000);
 }
+
+// ===============================
+// FOOTER → SCROLL + HIGHLIGHT
+// ===============================
+document.querySelectorAll('.footer-links a').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const id = this.getAttribute('href');
+        const seccion = document.querySelector(id);
+
+        if (!seccion) return;
+
+        const titulo = seccion.querySelector('.titulo-seccion');
+
+        // 🔥 abrir esa sección (sin cerrar otras)
+        seccion.classList.add('activa');
+
+        // 🔥 scroll suave
+        seccion.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        // 🔥 limpiar highlights
+        document.querySelectorAll('.titulo-seccion').forEach(t => {
+            t.classList.remove('highlight');
+        });
+
+        // 🔥 aplicar highlight correctamente (NEÓN REAL)
+       setTimeout(() => {
+        if (titulo) {
+
+        // 🔥 REINICIAR animación SIEMPRE
+        titulo.classList.remove('highlight');
+        void titulo.offsetWidth; // ⚠️ clave para que vuelva a animar
+        titulo.classList.add('highlight');
+
+    }
+}, 700);
+    });
+});
+// ===============================
+// SECCIONES EXPANDIBLES
+// ===============================
+        // cerrar otras (opcional, tipo acordeón)
+        document.querySelectorAll('.titulo-seccion').forEach(titulo => {
+    titulo.addEventListener('click', () => {
+        const seccion = titulo.parentElement;
+
+        // 🔥 SOLO alterna esta sección (no cierra otras)
+        seccion.classList.toggle('activa');
+    });
+});
