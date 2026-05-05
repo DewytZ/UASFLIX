@@ -91,3 +91,40 @@ function verDetalle(id) {
     // Esto nos mandará a video.html?id=1
     window.location.href = `video.html?id=${id}`;
 }
+
+function toggleSidebar() {
+    const sidebar = document.getElementById("sidebar");
+    const btn = document.querySelector(".menu-btn");
+
+    const abierto = sidebar.classList.toggle("active");
+    btn.textContent = abierto ? "Cerrar" : "Menú";
+}
+
+function toggleSearch() {
+    document.getElementById("searchMenu").classList.toggle("active");
+}
+
+function goProfile() {
+    window.location.href = "perfil.html";
+}
+
+function filterByTag() {
+    let tag = document.getElementById("tagFilter").value.toLowerCase();
+    let movies = document.querySelectorAll(".movie");
+
+    movies.forEach(movie => {
+        let genre = movie.dataset.genre.toLowerCase();
+        movie.style.display = tag === "" || genre.includes(tag) ? "block" : "none";
+    });
+}
+
+function toggleTheme() {
+    const body = document.body;
+    const btn = document.querySelector(".theme-btn");
+
+    body.classList.toggle("light-theme");
+
+    btn.textContent = body.classList.contains("light-theme")
+        ? "☀️ Modo oscuro"
+        : "🌙 Modo claro";
+}
