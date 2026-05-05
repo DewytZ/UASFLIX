@@ -9,6 +9,7 @@ body {
     background: var(--azul);
     color: white;
     overflow-x: hidden;
+    transition: background 0.3s, color 0.3s;
 }
 
 /* HEADER */
@@ -21,9 +22,9 @@ header {
     align-items: center;
     justify-content: space-between;
     font-weight: bold;
-    font-size: 22px; position: relative;
+    font-size: 22px;
+    position: relative;
     z-index: 1;
-    
 }
 
 .logo {
@@ -32,31 +33,6 @@ header {
     font-weight: 900;
     color: var(--amarillo);
     letter-spacing: 3px;
-}
-
-/* BUSCADOR */
-.search-box {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.search-box input {
-    padding: 6px;
-    border-radius: 5px;
-    border: none;
-    background-color: var(--amarillo);
-    color: var(--azul);
-}
-
-.search-box button {
-    border-radius: 5px;
-    background: var(--amarillo);
-    color: white;
-    border: none;
-    padding: 6px 10px;
-    cursor: pointer;
-    margin-right: 57px;
 }
 
 /* MENU */
@@ -186,9 +162,7 @@ nav button:hover {
     flex-direction: column;
     gap: 15px;
     z-index: 1000;
-    left: auto;
 
-    /* estilo visual */
     border-left: 2px solid rgba(255,255,255,0.3);
     box-shadow: -10px 0 25px rgba(0,0,0,0.9);
 }
@@ -232,6 +206,11 @@ nav button:hover {
     border: none;
 }
 
+.search-menu p {
+    margin: 10px 0 5px;
+    color: var(--amarillo);
+}
+
 /* BOTÓN TEMA */
 .theme-btn {
     margin-top: 20px;
@@ -244,29 +223,86 @@ nav button:hover {
     font-weight: bold;
 }
 
-/* MODO CLARO */
+/* ========================= */
+/* 🌞 MODO CLARO CORRECTO */
+/* ========================= */
+
 .light-theme {
-    --azul: #f5f5dc;
-    --amarillo: #003366;
-    background: #f5f5dc;
+    --azul: #f4f6fb9a;
+    --amarillo: #f0f400;
+
+    background: #f4f6fb;
     color: #1a1a1a;
 }
 
+/* HEADER */
 .light-theme header {
     background: #003366;
+    color: white;
 }
 
+/* NAV */
 .light-theme nav {
-    background: #e6e6e6;
+    background: #dfe6f2;
 }
 
+.light-theme nav button {
+    color: #003366;
+}
+
+.light-theme nav button:hover {
+    color: #FFD100;
+}
+
+/* ALFABETO */
+.light-theme .alphabet button {
+    background: #5a5a57c8;
+    color: #003366;
+}
+
+.light-theme .alphabet button:hover {
+    background: #FFD100;
+    color: black;
+}
+
+/* SIDEBAR */
 .light-theme .sidebar {
-    background: #ffffff;
+    background: #010341;
+    border-left: 2px solid rgba(0, 0, 0, 0.1);
 }
 
-.search-menu p {
-    margin: 10px 0 5px;
-    color: var(--amarillo);
+.light-theme .sidebar button {
+    color: #ffffff;
 }
 
+.light-theme .sidebar button:hover {
+    color: #FFD100;
+}
+
+/* SUBMENÚ */
+.light-theme .search-menu p {
+    color: #e6ff03;
+}
+
+.light-theme .search-menu input,
+.light-theme .search-menu select {
+    background: #f0f0f0;
+    color: #1a1a1a;
+}
+
+/* TARJETAS */
+.light-theme .movie img {
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+/* OVERLAY */
+.light-theme .overlay {
+    background: rgba(0, 0, 0, 0.8);
+}
+
+/* BOTÓN TEMA */
+.light-theme .theme-btn {
+    background: #003366;
+    color: #FFD100;
+}
 
