@@ -264,3 +264,9 @@ nav button:hover {
     background: #ffffff;
 }
 
+.search-menu p {
+    margin: 10px 0 5px;
+    color: var(--amarillo);
+}
+
+
