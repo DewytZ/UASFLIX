@@ -2,10 +2,22 @@ document.addEventListener("DOMContentLoaded", () => {
     generarAbecedario();
     cargarPeliculas();
 
-    // 🔥 CONECTAR BOTÓN MENÚ
+    // BOTÓN MENÚ
     const menuBtn = document.querySelector(".menu-btn");
     if (menuBtn) {
         menuBtn.addEventListener("click", toggleSidebar);
+    }
+
+    // BOTÓN BÚSQUEDA (abre/cierra el submenú)
+    const searchBtn = document.querySelector("#btnBusqueda");
+    if (searchBtn) {
+        searchBtn.addEventListener("click", toggleSearch);
+    }
+
+    // BOTÓN TEMA (dentro del sidebar)
+    const themeBtn = document.querySelector("#btnTema");
+    if (themeBtn) {
+        themeBtn.addEventListener("click", toggleTheme);
     }
 });
 
