@@ -1,11 +1,19 @@
 document.addEventListener("DOMContentLoaded", () => {
     generarAbecedario();
-    cargarPeliculas(); // Carga inicial
+    cargarPeliculas();
+
+    // 🔥 CONECTAR BOTÓN MENÚ
+    const menuBtn = document.querySelector(".menu-btn");
+    if (menuBtn) {
+        menuBtn.addEventListener("click", toggleSidebar);
+    }
 });
 
 // Generar botones A-Z dinámicamente
 function generarAbecedario() {
     const alphabetDiv = document.querySelector(".alphabet");
+    if (!alphabetDiv) return;
+
     for (let i = 65; i <= 90; i++) {
         const letter = String.fromCharCode(i);
         const btn = document.createElement("button");
@@ -20,16 +28,13 @@ async function cargarPeliculas(facultad = "") {
     const grid = document.getElementById("movies");
     if (!grid) return;
 
-    // Si pasamos facultad, usamos el endpoint de filtro, si no, traemos todas
     const url = facultad ? "/api/movies/faculty/" + facultad : "/api/movies";
-
-    console.log("Pidiendo datos a: " + url);
 
     try {
         const response = await fetch(url);
         const peliculas = await response.json();
         
-        grid.innerHTML = ""; // Limpiar antes de mostrar
+        grid.innerHTML = "";
 
         if (peliculas.length === 0) {
             grid.innerHTML = "<p>No hay películas para esta categoría.</p>";
@@ -39,7 +44,7 @@ async function cargarPeliculas(facultad = "") {
         peliculas.forEach(peli => {
             const card = document.createElement("div");
             card.className = "movie";
-            // Guardamos datos en el dataset por si queremos filtrar en el cliente luego
+
             card.dataset.title = peli.title;
             card.dataset.faculty = peli.faculty;
             card.dataset.genre = peli.genre;
@@ -62,15 +67,15 @@ async function cargarPeliculas(facultad = "") {
 
 // FILTROS
 function filterFaculty(faculty) {
-    cargarPeliculas(faculty); // Llamamos directamente a la API para filtrar
+    cargarPeliculas(faculty);
 }
 
 function showAll() {
-    cargarPeliculas(); // Carga sin parámetros
+    cargarPeliculas();
 }
 
 function searchMovie() {
-    let input = document.getElementById("searchInput").value.toLowerCase();
+    let input = document.getElementById("searchInput")?.value.toLowerCase() || "";
     let movies = document.querySelectorAll(".movie");
 
     movies.forEach(movie => {
@@ -81,6 +86,7 @@ function searchMovie() {
 
 function filterLetter(letter) {
     let movies = document.querySelectorAll(".movie");
+
     movies.forEach(movie => {
         let title = movie.dataset.title.toUpperCase();
         movie.style.display = title.startsWith(letter) ? "block" : "none";
@@ -88,28 +94,39 @@ function filterLetter(letter) {
 }
 
 function verDetalle(id) {
-    // Esto nos mandará a video.html?id=1
     window.location.href = `video.html?id=${id}`;
 }
 
+// 🔥 SIDEBAR
 function toggleSidebar() {
     const sidebar = document.getElementById("sidebar");
     const btn = document.querySelector(".menu-btn");
 
+    if (!sidebar) return;
+
     const abierto = sidebar.classList.toggle("active");
-    btn.textContent = abierto ? "Cerrar" : "Menú";
+
+    if (btn) {
+        btn.textContent = abierto ? "Cerrar" : "Menú";
+    }
 }
 
+// SUBMENÚ
 function toggleSearch() {
-    document.getElementById("searchMenu").classList.toggle("active");
+    const menu = document.getElementById("searchMenu");
+    if (menu) {
+        menu.classList.toggle("active");
+    }
 }
 
+// PERFIL
 function goProfile() {
     window.location.href = "perfil.html";
 }
 
+// FILTRAR POR ETIQUETAS
 function filterByTag() {
-    let tag = document.getElementById("tagFilter").value.toLowerCase();
+    let tag = document.getElementById("tagFilter")?.value.toLowerCase() || "";
     let movies = document.querySelectorAll(".movie");
 
     movies.forEach(movie => {
@@ -118,15 +135,18 @@ function filterByTag() {
     });
 }
 
+// CAMBIO DE TEMA
 function toggleTheme() {
     const body = document.body;
     const btn = document.querySelector(".theme-btn");
 
     body.classList.toggle("light-theme");
 
-    btn.textContent = body.classList.contains("light-theme")
-        ? "☀️ Modo oscuro"
-        : "🌙 Modo claro";
+    if (btn) {
+        btn.textContent = body.classList.contains("light-theme")
+            ? "☀️ Modo oscuro"
+            : "🌙 Modo claro";
+    }
 }
 
 
