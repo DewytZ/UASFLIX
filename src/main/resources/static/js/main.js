@@ -156,8 +156,8 @@ function toggleTheme() {
 
     if (btn) {
         btn.textContent = body.classList.contains("light-theme")
-            ? "☀️ Modo oscuro"
-            : "🌙 Modo claro";
+            ? "🌙 Modo oscuro"
+            : "☀️ Modo claro";
     }
 }
 
