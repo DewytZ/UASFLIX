@@ -1,14 +1,34 @@
-// Alternar entre Login y Registro
 function showLogin() {
-    document.getElementById("loginBox").classList.remove("hidden");
-    document.getElementById("registerBox").classList.add("hidden");
+
+    const loginBox = document.getElementById("loginBox");
+    const registerBox = document.getElementById("registerBox");
+
+    // Si ya está abierto → cerrar
+    if (!loginBox.classList.contains("hidden")) {
+        loginBox.classList.add("hidden");
+        return;
+    }
+
+    // Abrir login y cerrar registro
+    loginBox.classList.remove("hidden");
+    registerBox.classList.add("hidden");
 }
 
 function showRegister() {
-    document.getElementById("registerBox").classList.remove("hidden");
-    document.getElementById("loginBox").classList.add("hidden");
-}
 
+    const registerBox = document.getElementById("registerBox");
+    const loginBox = document.getElementById("loginBox");
+
+    // Si ya está abierto → cerrar
+    if (!registerBox.classList.contains("hidden")) {
+        registerBox.classList.add("hidden");
+        return;
+    }
+
+    // Abrir registro y cerrar login
+    registerBox.classList.remove("hidden");
+    loginBox.classList.add("hidden");
+}
 // Validar que el correo sea @info.uas.edu.mx
 function isInstitutionalEmail(email) {
     const pattern = /^[a-zA-Z0-9._%+-]+@(info\.uas\.edu\.mx|ms\.uas\.edu\.mx|uas\.edu\.mx)$/;
@@ -138,17 +158,5 @@ document.querySelectorAll('.footer-links a').forEach(link => {
 
     }
 }, 700);
-    });
-});
-// ===============================
-// SECCIONES EXPANDIBLES
-// ===============================
-        // cerrar otras (opcional, tipo acordeón)
-        document.querySelectorAll('.titulo-seccion').forEach(titulo => {
-    titulo.addEventListener('click', () => {
-        const seccion = titulo.parentElement;
-
-        // 🔥 SOLO alterna esta sección (no cierra otras)
-        seccion.classList.toggle('activa');
     });
 });
