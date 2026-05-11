@@ -1,17 +1,37 @@
-// Alternar entre Login y Registro
 function showLogin() {
-    document.getElementById("loginBox").classList.remove("hidden");
-    document.getElementById("registerBox").classList.add("hidden");
+
+    const loginBox = document.getElementById("loginBox");
+    const registerBox = document.getElementById("registerBox");
+
+    // Si ya está abierto → cerrar
+    if (!loginBox.classList.contains("hidden")) {
+        loginBox.classList.add("hidden");
+        return;
+    }
+
+    // Abrir login y cerrar registro
+    loginBox.classList.remove("hidden");
+    registerBox.classList.add("hidden");
 }
 
 function showRegister() {
-    document.getElementById("registerBox").classList.remove("hidden");
-    document.getElementById("loginBox").classList.add("hidden");
-}
 
+    const registerBox = document.getElementById("registerBox");
+    const loginBox = document.getElementById("loginBox");
+
+    // Si ya está abierto → cerrar
+    if (!registerBox.classList.contains("hidden")) {
+        registerBox.classList.add("hidden");
+        return;
+    }
+
+    // Abrir registro y cerrar login
+    registerBox.classList.remove("hidden");
+    loginBox.classList.add("hidden");
+}
 // Validar que el correo sea @info.uas.edu.mx
 function isInstitutionalEmail(email) {
-    const pattern = /^[a-zA-Z0-9._%+-]+@info\.uas\.edu\.mx$/;
+    const pattern = /^[a-zA-Z0-9._%+-]+@(info\.uas\.edu\.mx|ms\.uas\.edu\.mx|uas\.edu\.mx)$/;
     return pattern.test(email);
 }
 
@@ -26,7 +46,7 @@ async function handleRegister(e) {
 
     // 1. Validar correo institucional
     if (!isInstitutionalEmail(email)) {
-        alert("¡Error! Debes usar un correo @info.uas.edu.mx");
+        alert("¡Error! Debes usar un correo institucional válido (@info.uas.edu.mx, @ms.uas.edu.mx o @uas.edu.mx)");
         return;
     }
 
@@ -38,7 +58,7 @@ async function handleRegister(e) {
 
     // 3. Enviar datos al Backend (Spring Boot)
     try {
-        const response = await fetch("http://localhost:8080/api/users/register", {
+        const response = await fetch("/api/users/register", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
@@ -98,3 +118,45 @@ function mostrarMensajeBienvenida(name) {
         showLogin(); // Regresar al login después de registrarse
     }, 4000);
 }
+
+// ===============================
+// FOOTER → SCROLL + HIGHLIGHT
+// ===============================
+document.querySelectorAll('.footer-links a').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const id = this.getAttribute('href');
+        const seccion = document.querySelector(id);
+
+        if (!seccion) return;
+
+        const titulo = seccion.querySelector('.titulo-seccion');
+
+        // 🔥 abrir esa sección (sin cerrar otras)
+        seccion.classList.add('activa');
+
+        // 🔥 scroll suave
+        seccion.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        // 🔥 limpiar highlights
+        document.querySelectorAll('.titulo-seccion').forEach(t => {
+            t.classList.remove('highlight');
+        });
+
+        // 🔥 aplicar highlight correctamente (NEÓN REAL)
+       setTimeout(() => {
+        if (titulo) {
+
+        // 🔥 REINICIAR animación SIEMPRE
+        titulo.classList.remove('highlight');
+        void titulo.offsetWidth; // ⚠️ clave para que vuelva a animar
+        titulo.classList.add('highlight');
+
+    }
+}, 700);
+    });
+});
