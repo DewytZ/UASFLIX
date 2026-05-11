@@ -9,13 +9,23 @@
 
 <body>
 
-<header>
-    <h1 class="logo">UASFLIX</h1>
+
+
+   <header>
+
+    <div class="logo-container">
+        <img src="img/logouas.png" alt="UAS" class="logo-uas">
+        <h1 class="logo">UASFLIX</h1>
+    </div>
+
     <div class="header-buttons">
         <button class="top-btn" onclick="showLogin()">Iniciar sesión</button>
         <button class="top-btn" onclick="showRegister()">Registro</button>
     </div>
-</header>
+
+   </header>
+
+
 
 <main>
     <div class="background">
@@ -58,21 +68,106 @@
 
 <div id="welcomeBox"></div>
 
-<footer>
-    <div class="footer-container">
-        <div class="footer-left">
-            <h3>UASFLIX</h3>
-            <p>Plataforma oficial de la Universidad Autónoma de Sinaloa. FIC.</p>
+<section id="uasflix" class="seccion">
+    <h2 class="titulo-seccion">¿Qué es UASFLIX?</h2>
+
+    <div class="contenido">
+        <div class="texto">
+            <p>
+                UASFLIX es una plataforma académica diseñada para estudiantes de la Universidad Autónoma de Sinaloa,
+                que permite acceder a contenido audiovisual educativo de forma organizada, interactiva y accesible.
+            </p>
         </div>
-        <div class="footer-logo" style="display:flex;gap:15px;align-items:center;">
-            <img src="img/FIC.png" alt="FIC">
-            <img src="img/logo uas.png" alt="UAS">
+        <div class="imagen">
+            <img src="img/EstudiantesPelicula.jpg" alt="UASFLIX">
         </div>
     </div>
-    <div class="footer-bottom">© 2026 Universidad Autónoma de Sinaloa - UASFLIX</div>
+</section>
+
+<section id="objetivo" class="seccion">
+    <h2 class="titulo-seccion">Objetivo</h2>
+
+    <div class="contenido">
+        <div class="texto">
+            <p>
+                Desarrollar una plataforma web multimedia que facilite el acceso a contenido educativo,
+                fortaleciendo el aprendizaje autónomo de los estudiantes.
+            </p>
+        </div>
+        <div class="imagen">
+            <img src="img/Objetivo.jpg" alt="Objetivo">
+        </div>
+    </div>
+</section>
+
+<section id="mision" class="seccion">
+    <h2 class="titulo-seccion">Misión</h2>
+
+    <div class="contenido">
+        <div class="texto">
+            <p>
+                Brindar una herramienta digital accesible que promueva el aprendizaje dinámico
+                mediante contenido audiovisual educativo.
+            </p>
+        </div>
+        <div class="imagen">
+            <img src="img/Mision.jpg" alt="Misión">
+        </div>
+    </div>
+</section>
+
+<section id="vision" class="seccion">
+    <h2 class="titulo-seccion">Visión</h2>
+
+    <div class="contenido">
+        <div class="texto">
+            <p>
+                Convertirse en una plataforma innovadora que contribuya al desarrollo académico
+                y tecnológico de la comunidad universitaria.
+            </p>
+        </div>
+        <div class="imagen">
+            <img src="img/Vision.jpg" alt="Visión">
+        </div>
+    </div>
+</section>
+
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-left">
+            <h3>UASFLIX</h3>
+            <p>Plataforma académica de la Universidad Autónoma de Sinaloa.</p>
+        </div>
+
+        <div class="footer-right">
+            <div class="footer-logo">
+
+             <a href="https://fic.uas.edu.mx/" target="_blank">
+             <img src="img/FIC.png" alt="FIC">
+             </a>
+
+             <a href="https://www.uas.edu.mx/" target="_blank">
+             <img src="img/logouas.png" alt="UAS">
+             </a>
+
+            </div>
+
+            <div class="footer-links">
+                <a href="#uasflix">¿Qué es?</a>
+                <a href="#objetivo">Objetivo</a>
+                <a href="#mision">Misión</a>
+                <a href="#vision">Visión</a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 Universidad Autónoma de Sinaloa - UASFLIX
+    </div>
 </footer>
 
-<script src="js/login.js"></script>
-
+<script src="js/login.js" defer></script>
 </body>
 </html>
