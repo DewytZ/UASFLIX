@@ -1,4 +1,5 @@
 .profile-container{
+
     width: 100%;
     min-height: calc(100vh - 70px);
 
@@ -16,9 +17,7 @@
 
     background: rgba(255,255,255,0.08);
 
-    backdrop-filter: blur(12px);
-
-    border: 2px solid rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
 
     border-radius: 20px;
 
@@ -36,22 +35,20 @@
     width: 120px;
     height: 120px;
 
-    object-fit: cover;
-
     border-radius: 50%;
 
     border: 4px solid #FFD100;
+
+    object-fit: cover;
 
     margin-bottom: 20px;
 }
 
 .profile-card h1{
 
-    margin-bottom: 35px;
-
     color: #FFD100;
 
-    font-size: 38px;
+    margin-bottom: 35px;
 }
 
 .profile-info{
@@ -81,8 +78,6 @@
     border-radius: 12px;
 
     font-size: 16px;
-
-    word-break: break-word;
 }
 
 /* TEMA CLARO */
@@ -104,20 +99,4 @@ body.light-mode .profile-info div{
 body.light-mode .profile-info label{
 
     color: #0A1F44;
-}
-
-/* RESPONSIVE */
-
-@media(max-width: 600px){
-
-    .profile-card{
-
-        padding: 30px 20px;
-    }
-
-    .profile-card h1{
-
-        font-size: 30px;
-    }
-
 }
