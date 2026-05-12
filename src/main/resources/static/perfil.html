@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="es">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Perfil - UASFLIX</title>
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/perfil.css">
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo-container">
+        <img src="img/logouas.png" alt="Logo UAS" class="logo-uas">
+        <div class="logo">UASFLIX</div>
+    </div>
+
+    <!-- BOTÓN MENÚ -->
+    <div class="menu-btn">Menú</div>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar" class="sidebar">
+
+        <h2>Menú</h2>
+
+        <button onclick="goHome()">🏠 Inicio</button>
+
+        <button class="theme-btn" id="btnTema">
+            🌙 Cambiar tema
+        </button>
+
+        <button class="logout-btn" onclick="logout()">
+            ⛔ Cerrar sesión
+        </button>
+
+    </div>
+
+</header>
+
+<!-- PERFIL -->
+<div class="profile-container">
+
+    <div class="profile-card">
+
+        <img src="img/user.png" alt="Usuario" class="profile-avatar">
+
+        <h1>Mi Perfil</h1>
+
+        <div class="profile-info">
+
+            <label>Nombre de usuario</label>
+            <div id="username"></div>
+
+        </div>
+
+        <div class="profile-info">
+
+            <label>Correo electrónico</label>
+            <div id="email"></div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="js/perfil.js"></script>
+
+</body>
+</html>
