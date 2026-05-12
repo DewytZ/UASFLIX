@@ -156,9 +156,13 @@ function toggleTheme() {
 
     if (btn) {
         btn.textContent = body.classList.contains("light-theme")
-            ? "🌙 Modo oscuro"
+            ? "🌙Modo oscuro"
             : "☀️ Modo claro";
     }
 }
 
+// CERRAR SESIÓN
+function logout() {
+    window.location.href = "index.html";
+}
 
