@@ -224,14 +224,20 @@ nav button:hover {
 }
 
 /* ========================= */
-/* 🌞 MODO CLARO CORRECTO */
+/* 🌞 MODO CLARO ESTILO UAS */
 /* ========================= */
 
 .light-theme {
-    --azul: #f4f6fb9a;
-    --amarillo: #f0f400;
+    --azul: #003366;
+    --amarillo: #FFD100;
 
-    background: #f4f6fb;
+    background: #f5f5dc;
+    color: #1a1a1a;
+}
+
+/* BODY */
+.light-theme body {
+    background: #f5f5dc;
     color: #1a1a1a;
 }
 
@@ -241,23 +247,21 @@ nav button:hover {
     color: white;
 }
 
-/* NAV */
-.light-theme nav {
-    background: #dfe6f2;
-}
-
-.light-theme nav button {
-    color: #003366;
-}
-
-.light-theme nav button:hover {
+/* LOGO */
+.light-theme .logo {
     color: #FFD100;
 }
 
-/* ALFABETO */
+/* MENÚ */
+.light-theme .menu-btn {
+    color: #FFD100;
+}
+
+/* ABECEDARIO */
 .light-theme .alphabet button {
-    background: #5a5a57c8;
+    background: white;
     color: #003366;
+    border: 1px solid rgba(0,0,0,0.15);
 }
 
 .light-theme .alphabet button:hover {
@@ -265,39 +269,68 @@ nav button:hover {
     color: black;
 }
 
-/* SIDEBAR */
-.light-theme .sidebar {
-    background: #010341;
-    border-left: 2px solid rgba(0, 0, 0, 0.1);
+/* GRID */
+.light-theme .movie {
+    background: white;
+    border-radius: 8px;
+    padding: 5px;
+    border: 1px solid rgba(0,0,0,0.15);
 }
 
+/* IMÁGENES */
+.light-theme .movie img {
+    border: 2px solid #FFD100;
+}
+
+/* OVERLAY */
+.light-theme .overlay {
+    background: rgba(0, 51, 102, 0.92);
+    color: white;
+}
+
+/* BOTONES OVERLAY */
+.light-theme .overlay button {
+    background: #FFD100;
+    color: black;
+}
+
+/* =============================== */
+/* SIDEBAR MODO CLARO (BLANCO) */
+/* =============================== */
+
+.light-theme .sidebar {
+    background: #ffffff; /* blanco */
+    border-left: 2px solid rgba(0, 51, 102, 0.15);
+    box-shadow: -10px 0 25px rgba(0,0,0,0.15);
+}
+
+/* TÍTULO */
+.light-theme .sidebar h2 {
+    color: #003366; /* azul UAS */
+}
+
+/* BOTONES */
 .light-theme .sidebar button {
-    color: #ffffff;
+    color: #003366;
+    font-weight: bold;
 }
 
 .light-theme .sidebar button:hover {
     color: #FFD100;
 }
 
-/* SUBMENÚ */
+/* SUBMENÚ CONTENEDOR */
 .light-theme .search-menu p {
-    color: #e6ff03;
+    color: #003366;
+    font-weight: bold;
 }
 
+/* INPUT Y SELECT */
 .light-theme .search-menu input,
 .light-theme .search-menu select {
-    background: #f0f0f0;
+    background: #f5f5f5;
     color: #1a1a1a;
-}
-
-/* TARJETAS */
-.light-theme .movie img {
-    border: 1px solid rgba(0,0,0,0.1);
-}
-
-/* OVERLAY */
-.light-theme .overlay {
-    background: rgba(0, 0, 0, 0.8);
+    border: 1px solid rgba(0,0,0,0.2);
 }
 
 /* BOTÓN TEMA */
@@ -306,3 +339,57 @@ nav button:hover {
     color: #FFD100;
 }
 
+/* BOTÓN LOGOUT */
+.light-theme .logout-btn {
+    background: #d90429 !important;
+    color: rgb(255, 0, 0) !important;
+}
+
+/* EFECTO GENERAL MÁS LIMPIO */
+.light-theme .sidebar button:hover {
+    transform: translateX(3px);
+}
+
+/* BOTÓN TEMA Y LOGOUT COMO TEXTO (SIN FONDO) */
+.light-theme .theme-btn,
+.light-theme .logout-btn {
+    background: transparent !important;
+    border: none;
+    padding: 0;
+    color: #003366;
+    font-weight: bold;
+    text-align: left;
+    cursor: pointer;
+    box-shadow: none;
+}
+
+/* HOVER IGUAL QUE LOS DEMÁS BOTONES */
+.light-theme .theme-btn:hover,
+.light-theme .logout-btn:hover {
+    color: #FFD100;
+    transform: translateX(3px);
+}
+
+/* CONTENEDOR LOGO */
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: -5px;
+}
+
+/* LOGO UAS */
+.logo-uas {
+    height: 65px;
+    width: auto;
+    object-fit: contain;
+}
+
+/* TEXTO UASFLIX */
+.logo {
+    padding-left: 10px;
+    font-size: 28px;
+    font-weight: 900;
+    color: var(--amarillo);
+    letter-spacing: 3px;
+}
