@@ -93,13 +93,25 @@ async function handleLogin(e) {
         });
 
         if (response.ok) {
-            const user = await response.json();
-            // Guardamos el nombre en el navegador para saludarlo después
-            localStorage.setItem("userName", user.fullName);
-            window.location.href = "Pagina principal.html";
-        } else {
-            alert("Credenciales inválidas. Verifica tu correo y contraseña.");
-        }
+
+    const user = await response.json();
+
+    // GUARDAR USUARIO COMPLETO
+    localStorage.setItem(
+        "usuarioLogueado",
+        JSON.stringify({
+            nombre: user.fullName,
+            correo: user.email
+        })
+    );
+
+    window.location.href = "Pagina principal.html";
+
+} else {
+
+    alert("Credenciales inválidas. Verifica tu correo y contraseña.");
+
+}
     } catch (error) {
         console.error("Error en el login:", error);
         alert("El servidor no responde.");
