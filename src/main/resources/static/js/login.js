@@ -172,3 +172,24 @@ document.querySelectorAll('.footer-links a').forEach(link => {
 }, 700);
     });
 });
+
+// Función para copiar email al portapapeles
+function copyEmail(button) {
+    const email = 'uasflix@proton.me';
+    const originalText = button.textContent;
+    
+    navigator.clipboard.writeText(email).then(() => {
+        // Cambiar texto y agregar clase
+        button.textContent = '✓ ¡Copiado!';
+        button.classList.add('copied');
+        
+        // Volver al estado original después de 2 segundos
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 2000);
+    }).catch(err => {
+        console.error('Error al copiar:', err);
+        alert('No se pudo copiar el correo. Intenta de nuevo.');
+    });
+}
