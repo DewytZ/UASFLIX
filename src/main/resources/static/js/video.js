@@ -158,15 +158,33 @@ async function loadComments(movieId) {
         const container = document.getElementById("commentList");
         container.innerHTML = ""; // Vaciar lista anterior
 
+        if (listaComentarios.length === 0) {
+            container.innerHTML = `<p class="no-comments">Sé el primero en dejar un comentario...</p>`;
+            return;
+        }
+
         listaComentarios.forEach(c => {
             const div = document.createElement("div");
-            div.classList.add("comment");
-            div.style.borderBottom = "1px solid #333";
-            div.style.padding = "10px 0";
+            div.classList.add("comment-card"); // Usaremos esta nueva clase en CSS
             
+            // Formatear un poco la fecha si viene del backend
+            const fecha = c.createdAt ? new Date(c.createdAt).toLocaleDateString('es-MX', {
+                day: '2-digit',
+                month: 'short',
+                year: 'numeric'
+            }) : "Reciente";
+
             div.innerHTML = `
-                <div style="font-weight: bold; color: #00e5ff;">${c.userName}</div>
-                <div style="margin-top: 5px;">${c.commentText}</div>
+                <div class="comment-avatar">
+                    ${c.userName.charAt(0).toUpperCase()}
+                </div>
+                <div class="comment-content">
+                    <div class="comment-header">
+                        <span class="comment-author">${c.userName}</span>
+                        <span class="comment-date">${fecha}</span>
+                    </div>
+                    <div class="comment-text">${c.commentText}</div>
+                </div>
             `;
             container.appendChild(div);
         });
