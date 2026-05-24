@@ -92,14 +92,11 @@ main {
 }
 
 .bg-slide:nth-child(1){ background-image:url("../img/fic.jpg"); animation-delay:0s; }
-.bg-slide:nth-child(2){ background-image:url("../img/terminator.jpg"); animation-delay:4s; }
-.bg-slide:nth-child(3){ background-image:url("../img/pan.jpg"); animation-delay:8s; }
-.bg-slide:nth-child(4){ background-image:url("../img/2001.jpg"); animation-delay:12s; }
-.bg-slide:nth-child(5){ background-image:url("../img/matrix.jpg"); animation-delay:16s; }
-.bg-slide:nth-child(6){ background-image:url("../img/Oppenheimer.jpg"); animation-delay:20s; }
-.bg-slide:nth-child(7){ background-image:url("../img/futurama.jpg"); animation-delay:24s; }
-.bg-slide:nth-child(9){ background-image:url("../img/yo-robot.jpg"); animation-delay:32s; }
-.bg-slide:nth-child(11){ background-image:url("../img/volver.jpg"); animation-delay:40s; }
+.bg-slide:nth-child(2){ background-image:url("../img/1.jpg"); animation-delay:4s; }
+.bg-slide:nth-child(3){ background-image:url("../img/2.jpg"); animation-delay:8s; }
+.bg-slide:nth-child(4){ background-image:url("../img/3.jpg"); animation-delay:12s; }
+.bg-slide:nth-child(5){ background-image:url("../img/4.jpg"); animation-delay:16s; }
+.bg-slide:nth-child(6){ background-image:url("../img/5.jpg"); animation-delay:20s; }
 
 @keyframes slideAnimation {
   0% {
