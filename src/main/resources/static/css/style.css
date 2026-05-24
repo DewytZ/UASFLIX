@@ -7,6 +7,11 @@
 /* GENERAL */
 /* ========================= */
 
+html,
+body {
+    height: 100%;
+}
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
@@ -14,6 +19,10 @@ body {
     color: white;
     overflow-x: hidden;
     transition: 0.3s;
+
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 /* ========================= */
@@ -393,6 +402,8 @@ header {
     gap: 28px;
 
     padding: 30px;
+
+    flex: 1;
 }
 
 /* ========================= */
@@ -477,171 +488,133 @@ header {
 }
 
 /* ========================= */
-/* MODO CLARO */
+/* FOOTER */
 /* ========================= */
 
-.light-theme {
-
-    background: #f5f5dc;
-
-    color: #1a1a1a;
+.footer {
+    background: #003b78;
+    color: white;
+    padding: 35px 45px 15px;
+    margin-top: auto;
 }
 
-.light-theme header {
-
-    background: #003366;
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 35px;
 }
 
-/* BOTÓN INICIO */
-
-.light-theme .top-nav button {
-
-    background: linear-gradient(
-        145deg,
-        #ffffff,
-        #ececec
-    );
-
-    color: #003366;
-
-    border: 2px solid rgba(0,0,0,0.08);
-
-    box-shadow:
-        0 5px 15px rgba(0,0,0,0.10),
-        inset 0 1px 0 rgba(255,255,255,0.9);
+.footer-column {
+    flex: 1;
+    min-width: 180px;
 }
 
-.light-theme .top-nav button:hover {
-
-    color: #003366;
-
-    border-color: #FFD100;
-
-    background: linear-gradient(
-        145deg,
-        #ffffff,
-        #f6f6f6
-    );
+.footer-column h3,
+.footer-column h4 {
+    color: #FFD100;
+    margin-bottom: 14px;
+    font-weight: 900;
+    letter-spacing: 1px;
 }
 
-/* GENEROS Y FACULTADES */
-
-.light-theme .top-nav select {
-
-    background: linear-gradient(
-        145deg,
-        #FFD100,
-        #e0b400
-    );
-
-    color: #003366;
-
-    border: 2px solid rgba(0,0,0,0.08);
-
-    box-shadow:
-        0 5px 15px rgba(0,0,0,0.12),
-        inset 0 1px 0 rgba(255,255,255,0.5);
+.footer-column h3 {
+    font-size: 34px;
+    margin-top: 0;
 }
 
-.light-theme .top-nav select:hover {
-
-    background: linear-gradient(
-        145deg,
-        #ffe45c,
-        #f0c000
-    );
-
-    color: #003366;
-
-    border-color: rgba(0,51,102,0.2);
-
-    transform: translateY(-2px);
+.footer-column h4 {
+    font-size: 18px;
 }
 
-/* OPTIONS */
-
-.light-theme .top-nav select option {
-
-    background: #ffffff;
-
-    color: #003366;
+.footer-column p {
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.88);
 }
 
-/* SEARCH */
-
-.light-theme .search-box {
-
-    border-color: #FFD100;
-
-    background: rgba(255,255,255,0.7);
+.footer-links.vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }
 
-.light-theme .search-box input {
-
-    color: #003366;
+.footer-links.vertical a {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    transition: 0.3s;
 }
 
-.light-theme .search-box input::placeholder {
-
-    color: rgba(0,51,102,0.6);
+.footer-links.vertical a:hover {
+    color: #FFD100;
+    transform: translateX(3px);
 }
 
-.light-theme .search-box button {
-
-    color: #003366;
+.contact-text {
+    margin-bottom: 12px;
+    font-size: 15px;
 }
 
-/* SIDEBAR */
-
-.light-theme .sidebar {
-
-    background: linear-gradient(
-        180deg,
-        #f4f1e8,
-        #e8e4d7
-    );
-
-    border-left: 2px solid rgba(0,0,0,0.08);
-
-    box-shadow:
-        -10px 0 25px rgba(0,0,0,0.15);
+.email-box {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
-.light-theme .sidebar h2 {
-
-    color: #003366;
+.email-box span {
+    color: #FFD100;
+    font-size: 20px;
+    font-weight: 900;
 }
 
-.light-theme .sidebar button {
-
-    background: rgba(0,51,102,0.04);
-
-    border: 1px solid rgba(0,51,102,0.08);
-
-    color: #003366;
+.copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #FFD100;
+    color: #003b78;
+    text-decoration: none;
+    border-radius: 8px;
+    padding: 8px 12px;
+    font-size: 16px;
+    transition: 0.3s;
 }
 
-.light-theme .sidebar button:hover {
-
-    background: rgba(255,209,0,0.18);
-
-    color: #003366;
+.copy-btn:hover {
+    transform: scale(1.05);
 }
 
-/* TARJETAS */
-
-.light-theme .movie {
-
-    background: white;
-
-    padding: 6px;
-
-    border-radius: 12px;
+.footer-logo {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
 }
 
-.light-theme .overlay {
+.footer-logo img {
+    height: 55px;
+    object-fit: contain;
+    transition: 0.3s;
+}
 
-    background: rgba(0,51,102,0.92);
+.footer-logo img:hover {
+    transform: scale(1.05);
+}
+
+.footer-divider {
+    margin-top: 25px;
+    border-top: 1px solid rgba(255,255,255,0.18);
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: rgba(255,255,255,0.75);
 }
 
 /* ========================= */
@@ -651,30 +624,50 @@ header {
 @media (max-width: 1000px) {
 
     header {
-
         flex-wrap: wrap;
     }
 
     .top-nav {
-
         order: 3;
-
         width: 100%;
-
         justify-content: center;
-
         flex-wrap: wrap;
-
         margin-left: 0;
     }
 
     .header-right {
-
         margin-left: auto;
     }
 
     .search-box input {
-
         width: 150px;
+    }
+}
+
+@media (max-width: 900px) {
+
+    .footer {
+        padding: 30px 20px 15px;
+    }
+
+    .footer-container {
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    .footer-column h3 {
+        font-size: 28px;
+    }
+
+    .footer-column h4 {
+        font-size: 17px;
+    }
+
+    .footer-logo img {
+        height: 45px;
+    }
+
+    .email-box span {
+        font-size: 18px;
     }
 }
