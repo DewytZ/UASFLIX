@@ -1,11 +1,10 @@
-let rating = 0;
-let total = 0;
-let count = 0;
+let userRating = 0; // Calificación que el usuario actual va a elegir
+let globalMovieId = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
-    // 1. Obtener ID de la película desde la URL (ej: video.html?id=1)
     const urlParams = new URLSearchParams(window.location.search);
     const movieId = urlParams.get('id');
+    globalMovieId = movieId;
 
     if (!movieId) {
         alert("No se seleccionó ninguna película.");
@@ -13,18 +12,22 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // 2. Cargar datos de la película desde el Backend
+    // Cargar datos de la película, promedio de estrellas y comentarios en paralelo
     try {
         const response = await fetch("/api/movies/" + movieId);
-        if (!response.ok) throw new Error("Pelicula no encontrada");
+        if (!response.ok) throw new Error("Película no encontrada");
         
         const peli = await response.json();
 
-        // 3. Llenar el HTML con los datos reales
-        document.getElementById("video-frame").src = peli.videoUrl || "https://www.youtube.com/embed/dQw4w9WgXcQ"; // Video por defecto si no hay
+        // Llenar datos de la película
+        document.getElementById("video-frame").src = peli.videoUrl || "https://www.youtube.com/embed/dQw4w9WgXcQ";
         document.getElementById("movie-title").innerText = peli.title;
         document.getElementById("movie-desc").innerText = peli.description;
         document.getElementById("movie-faculty").innerText = peli.faculty;
+        
+        // Cargar datos interactivos de la Base de Datos
+        loadAverageRating(movieId);
+        loadComments(movieId);
         
     } catch (error) {
         console.error("Error cargando película:", error);
@@ -33,7 +36,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     inicializarEstrellas();
 });
 
-/* Lógica de Estrellas */
+/* ===============================
+   LÓGICA DE ESTRELLAS (RATINGS)
+   =============================== */
 function inicializarEstrellas() {
     const stars = document.querySelectorAll(".star");
     stars.forEach((star, index) => {
@@ -41,15 +46,17 @@ function inicializarEstrellas() {
             resetStars();
             for (let i = 0; i <= index; i++) stars[i].classList.add("hover");
         });
-        star.addEventListener("click", () => {
-            rating = index + 1;
-            setSelected(rating);
+        star.addEventListener("click", async () => {
+            userRating = index + 1;
+            setSelected(userRating);
+            // Mandar la calificación a la base de datos inmediatamente al dar clic
+            await saveRatingToDB(userRating);
         });
     });
 
     document.getElementById("stars").addEventListener("mouseleave", () => {
         resetStars();
-        setSelected(rating);
+        setSelected(userRating);
     });
 }
 
@@ -65,29 +72,107 @@ function setSelected(value) {
     for (let i = 0; i < value; i++) stars[i].classList.add("selected");
 }
 
-/* Comentarios */
-function addComment() {
+// Guarda la calificación en el backend
+async function saveRatingToDB(starsValue) {
+    // Jalamos el correo del usuario que inició sesión (¡Asegúrate de guardarlo en el login!)
+    const userEmail = localStorage.getItem("userEmail") || "anonimo@uas.edu.mx"; 
+
+    try {
+        const response = await fetch("/api/ratings", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                movieId: globalMovieId,
+                userEmail: userEmail,
+                stars: starsValue
+            })
+        });
+
+        if (response.ok) {
+            // Si se guardó con éxito, recalculamos el promedio en pantalla
+            loadAverageRating(globalMovieId);
+        }
+    } catch (error) {
+        console.error("Error al guardar calificación:", error);
+    }
+}
+
+// Trae el promedio de estrellas desde Java
+async function loadAverageRating(movieId) {
+    try {
+        const response = await fetch(`/api/ratings/movie/${movieId}/average`);
+        if (response.ok) {
+            const avg = await response.json();
+            // Muestra el promedio redondeado a 1 decimal (ej: 4.5)
+            document.getElementById("avg").innerText = avg ? avg.toFixed(1) : "0";
+        }
+    } catch (error) {
+        console.error("Error al cargar promedio:", error);
+    }
+}
+
+/* ===============================
+   LÓGICA DE COMENTARIOS
+   =============================== */
+
+// Publicar un nuevo comentario hacia el Backend
+async function addComment() {
     const text = document.getElementById("commentInput").value.trim();
-    if (!text || rating === 0) {
-        alert("Por favor selecciona una calificación y escribe un comentario.");
+    // Jalamos el nombre del alumno guardado durante el login
+    const userName = localStorage.getItem("userName") || "Estudiante UAS";
+
+    if (!text) {
+        alert("Por favor escribe un comentario antes de publicar.");
         return;
     }
 
-    total += rating;
-    count++;
-    document.getElementById("avg").innerText = (total / count).toFixed(1);
+    try {
+        const response = await fetch("/api/comments", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+                movieId: globalMovieId,
+                userName: userName,
+                commentText: text
+            })
+        });
 
-    const div = document.createElement("div");
-    div.classList.add("comment");
-    div.innerHTML = `
-        <div class="comment-stars">${"★".repeat(rating)}</div>
-        <div>${text}</div>
-    `;
+        if (response.ok) {
+            document.getElementById("commentInput").value = ""; // Limpiar caja
+            loadComments(globalMovieId); // Recargar la lista para mostrar el nuevo
+        } else {
+            alert("No se pudo guardar el comentario.");
+        }
+    } catch (error) {
+        console.error("Error al publicar comentario:", error);
+    }
+}
 
-    document.getElementById("commentList").prepend(div);
-    document.getElementById("commentInput").value = "";
-    rating = 0;
-    resetStars();
+// Cargar y mostrar los comentarios guardados en la BD
+async function loadComments(movieId) {
+    try {
+        const response = await fetch(`/api/comments/movie/${movieId}`);
+        if (!response.ok) throw new Error("Error obteniendo comentarios");
+
+        const listaComentarios = await response.json();
+        const container = document.getElementById("commentList");
+        container.innerHTML = ""; // Vaciar lista anterior
+
+        listaComentarios.forEach(c => {
+            const div = document.createElement("div");
+            div.classList.add("comment");
+            div.style.borderBottom = "1px solid #333";
+            div.style.padding = "10px 0";
+            
+            div.innerHTML = `
+                <div style="font-weight: bold; color: #00e5ff;">${c.userName}</div>
+                <div style="margin-top: 5px;">${c.commentText}</div>
+            `;
+            container.appendChild(div);
+        });
+    } catch (error) {
+        console.error("Error al cargar comentarios:", error);
+    }
 }
 
 function toggleTheme() {
