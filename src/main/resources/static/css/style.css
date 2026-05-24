@@ -30,10 +30,13 @@ header {
     position: sticky;
     top: 0;
     z-index: 1000;
+
     box-shadow: 0 5px 20px rgba(0,0,0,0.4);
 }
 
+/* ========================= */
 /* LOGO */
+/* ========================= */
 
 .logo-container {
     display: flex;
@@ -61,71 +64,122 @@ header {
 .top-nav {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 25px;
     flex: 1;
     margin-left: 30px;
 }
 
-/* BOTONES */
+/* BOTÓN INICIO */
 
-.top-nav button,
-.top-nav select {
-    background: transparent;
-    border: none;
+.top-nav button {
+
+    background: linear-gradient(
+        145deg,
+        #163977,
+        #0b224d
+    );
+
+    border: 2px solid rgba(255,255,255,0.12);
+
     color: white;
-    font-size: 18px;
+
+    font-size: 16px;
     font-weight: bold;
+
+    padding: 12px 20px;
+
+    border-radius: 14px;
+
     cursor: pointer;
-    transition: 0.3s;
+
+    transition: 0.3s ease;
+
+    box-shadow:
+        0 6px 15px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.08);
 }
 
-/* HOVER */
+.top-nav button:hover {
 
-.top-nav button:hover,
-.top-nav select:hover {
+    background: linear-gradient(
+        145deg,
+        #1c4b9c,
+        #102d66
+    );
+
     color: var(--amarillo);
+
+    border-color: rgba(255,209,0,0.5);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(0,0,0,0.45),
+        0 0 10px rgba(255,209,0,0.15);
 }
 
 /* ========================= */
-/* SELECTS GENEROS Y FACULTADES */
+/* BOTONES GENEROS Y FACULTADES */
 /* ========================= */
 
 .top-nav select {
-    background: #102a5c;
-    color: white;
-    padding: 10px 18px;
-    border-radius: 10px;
+
+    background: linear-gradient(
+        145deg,
+        #FFD100,
+        #d4aa00
+    );
+
+    color: #0A1F44;
+
     border: 2px solid rgba(255,255,255,0.15);
+
+    font-size: 16px;
     font-weight: bold;
+
+    padding: 12px 20px;
+
+    border-radius: 14px;
+
     cursor: pointer;
-    transition: 0.3s;
+
+    transition: 0.3s ease;
+
+    box-shadow:
+        0 6px 15px rgba(0,0,0,0.35),
+        inset 0 1px 0 rgba(255,255,255,0.3);
+
     appearance: none;
 }
 
 /* HOVER */
 
 .top-nav select:hover {
-    border-color: var(--amarillo);
-    color: var(--amarillo);
+
+    background: linear-gradient(
+        145deg,
+        #ffe14d,
+        #e0b400
+    );
+
+    color: #081427;
+
+    border-color: rgba(255,255,255,0.4);
+
+    transform: translateY(-2px);
+
+    box-shadow:
+        0 10px 22px rgba(0,0,0,0.45),
+        0 0 12px rgba(255,209,0,0.35);
 }
 
-/* OPCIONES DEL DROPDOWN */
+/* OPCIONES */
 
 .top-nav select option {
+
     background: #071632;
     color: white;
     font-weight: bold;
-}
-
-/* BOTÓN INICIO */
-
-.top-nav button {
-    padding: 10px 15px;
-    border-radius: 10px;
-}
-
-.top-nav button:hover {
-    background: rgba(255, 209, 0, 0.12);
 }
 
 /* ========================= */
@@ -143,21 +197,37 @@ header {
 /* ========================= */
 
 .search-box {
+
     display: flex;
     align-items: center;
+
     border: 2px solid var(--amarillo);
+
     border-radius: 40px;
+
     overflow: hidden;
+
     padding: 5px 12px;
+
+    background: rgba(255,255,255,0.04);
+
+    backdrop-filter: blur(8px);
+
+    box-shadow:
+        0 6px 15px rgba(0,0,0,0.25);
 }
 
 .search-box input {
+
     background: transparent;
     border: none;
     color: white;
+
     padding: 10px;
     width: 220px;
+
     outline: none;
+
     font-size: 15px;
 }
 
@@ -166,10 +236,14 @@ header {
 }
 
 .search-box button {
+
     background: transparent;
     border: none;
+
     color: var(--amarillo);
+
     font-size: 20px;
+
     cursor: pointer;
 }
 
@@ -178,23 +252,36 @@ header {
 /* ========================= */
 
 .profile-circle {
+
     width: 65px;
     height: 65px;
+
     border-radius: 50%;
+
     overflow: hidden;
+
     border: 3px solid rgba(255,255,255,0.4);
+
     cursor: pointer;
+
     transition: 0.3s;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.35);
 }
 
 .profile-circle:hover {
+
     transform: scale(1.05);
+
     border-color: var(--amarillo);
 }
 
 .profile-circle img {
+
     width: 100%;
     height: 100%;
+
     object-fit: cover;
 }
 
@@ -203,55 +290,92 @@ header {
 /* ========================= */
 
 .sidebar {
+
     position: fixed;
+
     top: 0;
     right: -320px;
+
     width: 280px;
     height: 100vh;
-    background: #071632;
+
+    background: linear-gradient(
+        180deg,
+        #0f2347,
+        #081427
+    );
+
     padding: 30px 25px;
+
     display: flex;
     flex-direction: column;
+
     gap: 25px;
+
     transition: 0.4s;
+
     z-index: 2000;
 
-    border-left: 2px solid rgba(255,255,255,0.2);
-    box-shadow: -10px 0 25px rgba(0,0,0,0.7);
+    border-left: 2px solid rgba(255,255,255,0.08);
+
+    box-shadow:
+        -10px 0 30px rgba(0,0,0,0.7);
 }
 
 .sidebar.active {
     right: 0;
 }
 
-/* TÍTULO MENU */
-
 .sidebar h2 {
+
     color: var(--amarillo);
+
     cursor: pointer;
+
     transition: 0.3s;
 }
 
 .sidebar h2:hover {
-    opacity: 0.8;
+
+    opacity: 0.85;
+
     transform: translateX(3px);
 }
 
 /* BOTONES SIDEBAR */
 
 .sidebar button {
-    background: transparent;
-    border: none;
+
+    background: rgba(255,255,255,0.04);
+
+    border: 1px solid rgba(255,255,255,0.06);
+
     color: white;
+
     font-size: 17px;
+
     text-align: left;
+
     cursor: pointer;
+
     font-weight: bold;
+
+    padding: 14px 16px;
+
+    border-radius: 12px;
+
     transition: 0.3s;
+
+    box-shadow:
+        0 4px 10px rgba(0,0,0,0.25);
 }
 
 .sidebar button:hover {
+
     color: var(--amarillo);
+
+    background: rgba(255,209,0,0.08);
+
     transform: translateX(5px);
 }
 
@@ -260,9 +384,14 @@ header {
 /* ========================= */
 
 .movies-grid {
+
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(190px, 1fr));
+
     gap: 28px;
+
     padding: 30px;
 }
 
@@ -271,19 +400,29 @@ header {
 /* ========================= */
 
 .movie {
+
     position: relative;
+
     cursor: pointer;
 }
 
 .movie img {
+
     width: 100%;
     height: 290px;
+
     object-fit: cover;
+
     border-radius: 12px;
+
     transition: 0.3s;
+
+    box-shadow:
+        0 8px 20px rgba(0,0,0,0.35);
 }
 
 .movie:hover img {
+
     transform: scale(1.03);
 }
 
@@ -292,16 +431,25 @@ header {
 /* ========================= */
 
 .overlay {
+
     position: absolute;
+
     inset: 0;
+
     background: rgba(0,0,0,0.88);
+
     opacity: 0;
+
     transition: 0.3s;
+
     border-radius: 12px;
 
     display: flex;
+
     flex-direction: column;
+
     justify-content: center;
+
     text-align: center;
 
     padding: 15px;
@@ -312,12 +460,19 @@ header {
 }
 
 .overlay button {
+
     margin-top: 10px;
+
     background: var(--amarillo);
+
     border: none;
+
     padding: 10px;
+
     border-radius: 8px;
+
     cursor: pointer;
+
     font-weight: bold;
 }
 
@@ -326,97 +481,166 @@ header {
 /* ========================= */
 
 .light-theme {
+
     background: #f5f5dc;
+
     color: #1a1a1a;
 }
 
-/* HEADER */
-
 .light-theme header {
+
     background: #003366;
 }
 
-/* BOTONES NAV */
+/* BOTÓN INICIO */
 
-.light-theme .top-nav button,
-.light-theme .top-nav select {
-    color: white;
-}
+.light-theme .top-nav button {
 
-/* HOVER NAV */
+    background: linear-gradient(
+        145deg,
+        #ffffff,
+        #ececec
+    );
 
-.light-theme .top-nav button:hover,
-.light-theme .top-nav select:hover {
-    color: var(--amarillo);
-}
-
-/* SELECTS */
-
-.light-theme .top-nav select {
-    background: white;
     color: #003366;
-    border: 2px solid rgba(0,0,0,0.15);
+
+    border: 2px solid rgba(0,0,0,0.08);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.10),
+        inset 0 1px 0 rgba(255,255,255,0.9);
 }
 
-.light-theme .top-nav select:hover {
+.light-theme .top-nav button:hover {
+
+    color: #003366;
+
     border-color: #FFD100;
-    color: #003366;
+
+    background: linear-gradient(
+        145deg,
+        #ffffff,
+        #f6f6f6
+    );
 }
 
-/* OPCIONES */
+/* GENEROS Y FACULTADES */
+
+.light-theme .top-nav select {
+
+    background: linear-gradient(
+        145deg,
+        #FFD100,
+        #e0b400
+    );
+
+    color: #003366;
+
+    border: 2px solid rgba(0,0,0,0.08);
+
+    box-shadow:
+        0 5px 15px rgba(0,0,0,0.12),
+        inset 0 1px 0 rgba(255,255,255,0.5);
+}
+
+.light-theme .top-nav select:hover {
+
+    background: linear-gradient(
+        145deg,
+        #ffe45c,
+        #f0c000
+    );
+
+    color: #003366;
+
+    border-color: rgba(0,51,102,0.2);
+
+    transform: translateY(-2px);
+}
+
+/* OPTIONS */
 
 .light-theme .top-nav select option {
+
     background: #ffffff;
+
     color: #003366;
 }
 
 /* SEARCH */
 
 .light-theme .search-box {
-    border-color: white;
+
+    border-color: #FFD100;
+
+    background: rgba(255,255,255,0.7);
 }
 
 .light-theme .search-box input {
-    color: white;
+
+    color: #003366;
 }
 
 .light-theme .search-box input::placeholder {
-    color: rgba(255,255,255,0.7);
+
+    color: rgba(0,51,102,0.6);
+}
+
+.light-theme .search-box button {
+
+    color: #003366;
 }
 
 /* SIDEBAR */
 
 .light-theme .sidebar {
-    background: white;
-    border-left: 2px solid rgba(0,0,0,0.1);
+
+    background: linear-gradient(
+        180deg,
+        #f4f1e8,
+        #e8e4d7
+    );
+
+    border-left: 2px solid rgba(0,0,0,0.08);
+
+    box-shadow:
+        -10px 0 25px rgba(0,0,0,0.15);
 }
 
 .light-theme .sidebar h2 {
+
     color: #003366;
 }
 
 .light-theme .sidebar button {
+
+    background: rgba(0,51,102,0.04);
+
+    border: 1px solid rgba(0,51,102,0.08);
+
     color: #003366;
 }
 
-/* HOVER SIDEBAR */
-
 .light-theme .sidebar button:hover {
-    color: #FFD100;
-    transform: translateX(5px);
+
+    background: rgba(255,209,0,0.18);
+
+    color: #003366;
 }
 
 /* TARJETAS */
 
 .light-theme .movie {
+
     background: white;
+
     padding: 6px;
+
     border-radius: 12px;
 }
 
-/* OVERLAY */
-
 .light-theme .overlay {
+
     background: rgba(0,51,102,0.92);
 }
 
@@ -427,22 +651,30 @@ header {
 @media (max-width: 1000px) {
 
     header {
+
         flex-wrap: wrap;
     }
 
     .top-nav {
+
         order: 3;
+
         width: 100%;
+
         justify-content: center;
+
         flex-wrap: wrap;
+
         margin-left: 0;
     }
 
     .header-right {
+
         margin-left: auto;
     }
 
     .search-box input {
+
         width: 150px;
     }
 }
