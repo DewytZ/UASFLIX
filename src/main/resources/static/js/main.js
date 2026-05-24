@@ -209,3 +209,39 @@ function logout() {
     window.location.href = "index.html";
 
 }
+
+
+// ===============================
+// FOOTER → SCROLL + HIGHLIGHT
+// ===============================
+document.querySelectorAll('.footer-links a').forEach(link => {
+    link.addEventListener('click', function (e) {
+        e.preventDefault();
+
+        const id = this.getAttribute('href');
+        const seccion = document.querySelector(id);
+
+        if (!seccion) return;
+
+        const titulo = seccion.querySelector('.titulo-seccion');
+
+        seccion.classList.add('activa');
+
+        seccion.scrollIntoView({
+            behavior: "smooth",
+            block: "center"
+        });
+
+        document.querySelectorAll('.titulo-seccion').forEach(t => {
+            t.classList.remove('highlight');
+        });
+
+        setTimeout(() => {
+            if (titulo) {
+                titulo.classList.remove('highlight');
+                void titulo.offsetWidth; 
+                titulo.classList.add('highlight');
+            }
+        }, 700);
+    });
+});
