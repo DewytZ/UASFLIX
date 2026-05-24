@@ -160,10 +160,3 @@ document.querySelectorAll('.footer-links a').forEach(link => {
     });
 });
 
-// COPIAR CORREO
-function copyEmail() {
-
-    navigator.clipboard.writeText("uasflix@proton.me");
-
-    alert("Correo copiado al portapapeles");
-}
