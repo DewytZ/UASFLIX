@@ -3,96 +3,272 @@
     --azul: #0A1F44;
 }
 
+/* ========================= */
+/* GENERAL */
+/* ========================= */
+
 body {
     margin: 0;
     font-family: Arial, sans-serif;
     background: var(--azul);
     color: white;
     overflow-x: hidden;
-    transition: background 0.3s, color 0.3s;
+    transition: 0.3s;
 }
 
+/* ========================= */
 /* HEADER */
+/* ========================= */
+
 header {
-    font-family: system-ui;
     background: var(--azul);
-    color: #001f4d;
-    padding: 15px;
+    padding: 18px 30px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    font-weight: bold;
-    font-size: 22px;
-    position: relative;
-    z-index: 1;
+    gap: 25px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.4);
+}
+
+/* LOGO */
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.logo-uas {
+    height: 60px;
+    width: auto;
+    object-fit: contain;
 }
 
 .logo {
-    padding-left: 40px;
-    font-size: 28px;
+    font-size: 34px;
     font-weight: 900;
     color: var(--amarillo);
     letter-spacing: 3px;
 }
 
-/* MENU */
-nav {
-    background: #071632;
-    padding: 10px;
+/* ========================= */
+/* NAV */
+/* ========================= */
+
+.top-nav {
     display: flex;
-    justify-content: center;
-    gap: 30px;
-    flex-wrap: wrap;
+    align-items: center;
+    gap: 20px;
+    flex: 1;
+    margin-left: 30px;
 }
 
-nav button {
+/* BOTONES */
+
+.top-nav button,
+.top-nav select {
     background: transparent;
-    color: white;
     border: none;
+    color: white;
+    font-size: 18px;
     font-weight: bold;
     cursor: pointer;
     transition: 0.3s;
 }
 
-nav button:hover {
+/* HOVER */
+
+.top-nav button:hover,
+.top-nav select:hover {
     color: var(--amarillo);
 }
 
-/* ABECEDARIO */
-.alphabet {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    padding: 15px;
+/* ========================= */
+/* SELECTS GENEROS Y FACULTADES */
+/* ========================= */
+
+.top-nav select {
+    background: #102a5c;
+    color: white;
+    padding: 10px 18px;
+    border-radius: 10px;
+    border: 2px solid rgba(255,255,255,0.15);
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+    appearance: none;
 }
 
-.alphabet button {
+/* HOVER */
+
+.top-nav select:hover {
+    border-color: var(--amarillo);
+    color: var(--amarillo);
+}
+
+/* OPCIONES DEL DROPDOWN */
+
+.top-nav select option {
     background: #071632;
+    color: white;
+    font-weight: bold;
+}
+
+/* BOTÓN INICIO */
+
+.top-nav button {
+    padding: 10px 15px;
+    border-radius: 10px;
+}
+
+.top-nav button:hover {
+    background: rgba(255, 209, 0, 0.12);
+}
+
+/* ========================= */
+/* HEADER RIGHT */
+/* ========================= */
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+/* ========================= */
+/* SEARCH */
+/* ========================= */
+
+.search-box {
+    display: flex;
+    align-items: center;
+    border: 2px solid var(--amarillo);
+    border-radius: 40px;
+    overflow: hidden;
+    padding: 5px 12px;
+}
+
+.search-box input {
+    background: transparent;
     border: none;
     color: white;
-    padding: 6px 10px;
+    padding: 10px;
+    width: 220px;
+    outline: none;
+    font-size: 15px;
+}
+
+.search-box input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+.search-box button {
+    background: transparent;
+    border: none;
+    color: var(--amarillo);
+    font-size: 20px;
     cursor: pointer;
-    border-radius: 4px;
 }
 
-.alphabet button:hover {
-    background: var(--amarillo);
-    color: black;
+/* ========================= */
+/* PERFIL */
+/* ========================= */
+
+.profile-circle {
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255,255,255,0.4);
+    cursor: pointer;
+    transition: 0.3s;
 }
 
+.profile-circle:hover {
+    transform: scale(1.05);
+    border-color: var(--amarillo);
+}
+
+.profile-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* ========================= */
+/* SIDEBAR */
+/* ========================= */
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    right: -320px;
+    width: 280px;
+    height: 100vh;
+    background: #071632;
+    padding: 30px 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    transition: 0.4s;
+    z-index: 2000;
+
+    border-left: 2px solid rgba(255,255,255,0.2);
+    box-shadow: -10px 0 25px rgba(0,0,0,0.7);
+}
+
+.sidebar.active {
+    right: 0;
+}
+
+/* TÍTULO MENU */
+
+.sidebar h2 {
+    color: var(--amarillo);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidebar h2:hover {
+    opacity: 0.8;
+    transform: translateX(3px);
+}
+
+/* BOTONES SIDEBAR */
+
+.sidebar button {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 17px;
+    text-align: left;
+    cursor: pointer;
+    font-weight: bold;
+    transition: 0.3s;
+}
+
+.sidebar button:hover {
+    color: var(--amarillo);
+    transform: translateX(5px);
+}
+
+/* ========================= */
 /* GRID */
-.container {
-    width: 90%;
-    margin: auto;
-}
+/* ========================= */
 
 .movies-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 20px;
-    margin: 20px;
+    grid-template-columns: repeat(auto-fill, minmax(190px, 1fr));
+    gap: 28px;
+    padding: 30px;
 }
+
+/* ========================= */
+/* TARJETAS */
+/* ========================= */
 
 .movie {
     position: relative;
@@ -101,25 +277,34 @@ nav button:hover {
 
 .movie img {
     width: 100%;
-    height: 260px;
+    height: 290px;
     object-fit: cover;
-    border-radius: 6px;
+    border-radius: 12px;
+    transition: 0.3s;
 }
 
+.movie:hover img {
+    transform: scale(1.03);
+}
+
+/* ========================= */
 /* OVERLAY */
+/* ========================= */
+
 .overlay {
     position: absolute;
     inset: 0;
-    background: rgba(0, 0, 0, .9);
+    background: rgba(0,0,0,0.88);
     opacity: 0;
-    transition: .3s;
-    padding: 10px;
-    font-size: 14px;
-    border-radius: 6px;
+    transition: 0.3s;
+    border-radius: 12px;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     text-align: center;
+
+    padding: 15px;
 }
 
 .movie:hover .overlay {
@@ -127,269 +312,137 @@ nav button:hover {
 }
 
 .overlay button {
-    background: var(--amarillo);
-    border: none;
-    padding: 5px;
     margin-top: 10px;
-    cursor: pointer;
-    font-weight: bold;
-    border-radius: 4px;
-}
-
-/* BOTÓN MENÚ */
-.menu-btn {
-    font-size: 18px;
-    cursor: pointer;
-    margin-right: 40px;
-    color: var(--amarillo);
-    font-weight: bold;
-    position: relative;
-    z-index: 1100;
-}
-
-/* SIDEBAR */
-.sidebar {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 250px;
-    height: 100vh;
-    background: #071632;
-    padding: 20px;
-    transform: translateX(100%);
-    transition: transform 0.4s ease;
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    z-index: 1000;
-
-    border-left: 2px solid rgba(255,255,255,0.3);
-    box-shadow: -10px 0 25px rgba(0,0,0,0.9);
-}
-
-.sidebar.active {
-    transform: translateX(0);
-}
-
-.sidebar h2 {
-    color: var(--amarillo);
-}
-
-.sidebar button {
-    background: transparent;
-    border: none;
-    color: white;
-    font-size: 16px;
-    text-align: left;
-    cursor: pointer;
-}
-
-.sidebar button:hover {
-    color: var(--amarillo);
-}
-
-/* SUBMENÚ */
-.search-menu {
-    display: none;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.search-menu.active {
-    display: flex;
-}
-
-.search-menu input,
-.search-menu select {
-    padding: 6px;
-    border-radius: 5px;
-    border: none;
-}
-
-.search-menu p {
-    margin: 10px 0 5px;
-    color: var(--amarillo);
-}
-
-/* BOTÓN TEMA */
-.theme-btn {
-    margin-top: 20px;
     background: var(--amarillo);
-    color: var(--azul);
     border: none;
     padding: 10px;
+    border-radius: 8px;
     cursor: pointer;
-    border-radius: 6px;
     font-weight: bold;
 }
 
 /* ========================= */
-/* 🌞 MODO CLARO ESTILO UAS */
+/* MODO CLARO */
 /* ========================= */
 
 .light-theme {
-    --azul: #003366;
-    --amarillo: #FFD100;
-
-    background: #f5f5dc;
-    color: #1a1a1a;
-}
-
-/* BODY */
-.light-theme body {
     background: #f5f5dc;
     color: #1a1a1a;
 }
 
 /* HEADER */
+
 .light-theme header {
     background: #003366;
+}
+
+/* BOTONES NAV */
+
+.light-theme .top-nav button,
+.light-theme .top-nav select {
     color: white;
 }
 
-/* LOGO */
-.light-theme .logo {
-    color: #FFD100;
+/* HOVER NAV */
+
+.light-theme .top-nav button:hover,
+.light-theme .top-nav select:hover {
+    color: var(--amarillo);
 }
 
-/* MENÚ */
-.light-theme .menu-btn {
-    color: #FFD100;
-}
+/* SELECTS */
 
-/* ABECEDARIO */
-.light-theme .alphabet button {
+.light-theme .top-nav select {
     background: white;
     color: #003366;
-    border: 1px solid rgba(0,0,0,0.15);
+    border: 2px solid rgba(0,0,0,0.15);
 }
 
-.light-theme .alphabet button:hover {
-    background: #FFD100;
-    color: black;
+.light-theme .top-nav select:hover {
+    border-color: #FFD100;
+    color: #003366;
 }
 
-/* GRID */
+/* OPCIONES */
+
+.light-theme .top-nav select option {
+    background: #ffffff;
+    color: #003366;
+}
+
+/* SEARCH */
+
+.light-theme .search-box {
+    border-color: white;
+}
+
+.light-theme .search-box input {
+    color: white;
+}
+
+.light-theme .search-box input::placeholder {
+    color: rgba(255,255,255,0.7);
+}
+
+/* SIDEBAR */
+
+.light-theme .sidebar {
+    background: white;
+    border-left: 2px solid rgba(0,0,0,0.1);
+}
+
+.light-theme .sidebar h2 {
+    color: #003366;
+}
+
+.light-theme .sidebar button {
+    color: #003366;
+}
+
+/* HOVER SIDEBAR */
+
+.light-theme .sidebar button:hover {
+    color: #FFD100;
+    transform: translateX(5px);
+}
+
+/* TARJETAS */
+
 .light-theme .movie {
     background: white;
-    border-radius: 8px;
-    padding: 5px;
-    border: 1px solid rgba(0,0,0,0.15);
-}
-
-/* IMÁGENES */
-.light-theme .movie img {
-    border: 2px solid #FFD100;
+    padding: 6px;
+    border-radius: 12px;
 }
 
 /* OVERLAY */
+
 .light-theme .overlay {
-    background: rgba(0, 51, 102, 0.92);
-    color: white;
+    background: rgba(0,51,102,0.92);
 }
 
-/* BOTONES OVERLAY */
-.light-theme .overlay button {
-    background: #FFD100;
-    color: black;
-}
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
 
-/* =============================== */
-/* SIDEBAR MODO CLARO (BLANCO) */
-/* =============================== */
+@media (max-width: 1000px) {
 
-.light-theme .sidebar {
-    background: #ffffff; /* blanco */
-    border-left: 2px solid rgba(0, 51, 102, 0.15);
-    box-shadow: -10px 0 25px rgba(0,0,0,0.15);
-}
+    header {
+        flex-wrap: wrap;
+    }
 
-/* TÍTULO */
-.light-theme .sidebar h2 {
-    color: #003366; /* azul UAS */
-}
+    .top-nav {
+        order: 3;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        margin-left: 0;
+    }
 
-/* BOTONES */
-.light-theme .sidebar button {
-    color: #003366;
-    font-weight: bold;
-}
+    .header-right {
+        margin-left: auto;
+    }
 
-.light-theme .sidebar button:hover {
-    color: #FFD100;
-}
-
-/* SUBMENÚ CONTENEDOR */
-.light-theme .search-menu p {
-    color: #003366;
-    font-weight: bold;
-}
-
-/* INPUT Y SELECT */
-.light-theme .search-menu input,
-.light-theme .search-menu select {
-    background: #f5f5f5;
-    color: #1a1a1a;
-    border: 1px solid rgba(0,0,0,0.2);
-}
-
-/* BOTÓN TEMA */
-.light-theme .theme-btn {
-    background: #003366;
-    color: #FFD100;
-}
-
-/* BOTÓN LOGOUT */
-.light-theme .logout-btn {
-    background: #d90429 !important;
-    color: rgb(255, 0, 0) !important;
-}
-
-/* EFECTO GENERAL MÁS LIMPIO */
-.light-theme .sidebar button:hover {
-    transform: translateX(3px);
-}
-
-/* BOTÓN TEMA Y LOGOUT COMO TEXTO (SIN FONDO) */
-.light-theme .theme-btn,
-.light-theme .logout-btn {
-    background: transparent !important;
-    border: none;
-    padding: 0;
-    color: #003366;
-    font-weight: bold;
-    text-align: left;
-    cursor: pointer;
-    box-shadow: none;
-}
-
-/* HOVER IGUAL QUE LOS DEMÁS BOTONES */
-.light-theme .theme-btn:hover,
-.light-theme .logout-btn:hover {
-    color: #FFD100;
-    transform: translateX(3px);
-}
-
-/* CONTENEDOR LOGO */
-.logo-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-left: -5px;
-}
-
-/* LOGO UAS */
-.logo-uas {
-    height: 65px;
-    width: auto;
-    object-fit: contain;
-}
-
-/* TEXTO UASFLIX */
-.logo {
-    padding-left: 10px;
-    font-size: 28px;
-    font-weight: 900;
-    color: var(--amarillo);
-    letter-spacing: 3px;
+    .search-box input {
+        width: 150px;
+    }
 }
