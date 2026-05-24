@@ -1,77 +1,207 @@
 <!doctype html>
 <html lang="es">
+
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1"
+    >
+
     <title>UASFLIX</title>
-    <link rel="stylesheet" href="css/style.css">
+
+    <link
+        rel="stylesheet"
+        href="css/style.css"
+    >
+
 </head>
 
 <body>
 
+    <!-- ======================================== -->
+    <!-- HEADER -->
+    <!-- ======================================== -->
+
     <header>
-     <div class="logo-container">
-     <img src="img/logouas.png" alt="Logo UAS" class="logo-uas">
-     <div class="logo">UASFLIX</div>
-     </div>
 
-    <!-- BOTÓN MENÚ (SE QUEDA AQUÍ) -->
-    <div class="menu-btn">Menú</div>
+        <!-- LOGO -->
+        <div class="logo-container">
 
-    <!-- SIDEBAR -->
-    <div id="sidebar" class="sidebar">
-        <h2>Menú</h2>
+            <img
+                src="img/logouas.png"
+                alt="Logo UAS"
+                class="logo-uas"
+            >
 
-        <button onclick="showAll()">🏠 Inicio</button>
-        <button onclick="goProfile()">👤 Perfil</button>
+            <div class="logo">
+                UASFLIX
+            </div>
 
-        <!-- BOTÓN BÚSQUEDA -->
-        <button id="btnBusqueda">🔍 Búsqueda</button>
+        </div>
 
-        <!-- SUBMENÚ -->
-        <div id="searchMenu" class="search-menu">
-            <!-- Facultades -->
-            <p><b>Facultades</b></p>
-            <button onclick="filterFaculty('informatica')">💻 Informática</button>
-            <button onclick="filterFaculty('ingenieria')">🛠 Ingeniería</button>
-            <button onclick="filterFaculty('medicina')">🩺 Medicina</button>
-            <button onclick="filterFaculty('derecho')">⚖ Derecho</button>
-            <button onclick="filterFaculty('arquitectura')">🏛 Arquitectura</button>
-            <button onclick="showAll()">🌐 Todas</button>
+        <!-- NAV -->
+        <div class="top-nav">
 
-            <!-- Buscar por nombre -->
-            <p><b>Búsqueda</b></p>
-            <input type="text" id="searchInput" placeholder="Buscar película">
-            <button onclick="searchMovie()">Buscar</button>
+            <!-- INICIO -->
+            <button onclick="showAll()">
+                Inicio
+            </button>
 
-            <!-- Etiquetas -->
-            <p><b>Etiquetas</b></p>
-            <select id="tagFilter" onchange="filterByTag()">
-                <option value="">Seleccionar</option>
-                <option value="accion">Acción</option>
-                <option value="Suspenso">Suspenso</option>
-                <option value="Drama">Drama</option>
-                <option value="comedia">Comedia</option>
+            <!-- GÉNEROS -->
+            <select
+                id="tagFilter"
+                onchange="filterByTag()"
+            >
+
+                <option value="">
+                    Géneros
+                </option>
+
+                <option value="accion">
+                    Acción
+                </option>
+
+                <option value="suspenso">
+                    Suspenso
+                </option>
+
+                <option value="drama">
+                    Drama
+                </option>
+
+                <option value="comedia">
+                    Comedia
+                </option>
+
             </select>
+
+            <!-- FACULTADES -->
+            <select
+                id="facultyFilter"
+                onchange="filterFaculty(this.value)"
+            >
+
+                <option value="">
+                    Facultades
+                </option>
+
+                <option value="informatica">
+                    💻 Informática
+                </option>
+
+                <option value="ingenieria">
+                    🛠 Ingeniería
+                </option>
+
+                <option value="medicina">
+                    🩺 Medicina
+                </option>
+
+                <option value="derecho">
+                    ⚖ Derecho
+                </option>
+
+                <option value="arquitectura">
+                    🏛 Arquitectura
+                </option>
+
+            </select>
+
         </div>
 
-        <!-- 🔥 BOTÓN TEMA (DENTRO DEL SIDEBAR) -->
-        <button class="theme-btn" id="btnTema">🌙 Cambiar tema</button>
+        <!-- DERECHA -->
+        <div class="header-right">
 
-        <!-- 🔴 CERRAR SESIÓN -->
-        <button class="logout-btn" onclick="logout()">⛔ Cerrar sesión</button>
+            <!-- BUSCADOR -->
+            <div class="search-box">
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Buscar por título"
+                >
+
+                <button onclick="searchMovie()">
+                    🔍
+                </button>
+
+            </div>
+
+            <!-- PERFIL -->
+            <div
+                class="profile-circle"
+                onclick="toggleSidebar()"
+            >
+
+                <img
+                    src="img/perfil.png"
+                    alt="Perfil"
+                >
+
+            </div>
+
+        </div>
+
+    </header>
+
+    <!-- ======================================== -->
+    <!-- GRID PELÍCULAS -->
+    <!-- ======================================== -->
+
+    <div
+        class="movies-grid"
+        id="movies"
+    ></div>
+
+    <!-- ======================================== -->
+    <!-- SIDEBAR -->
+    <!-- ======================================== -->
+
+    <div
+        id="sidebar"
+        class="sidebar"
+     >
+
+        <h2 onclick="toggleSidebar()">
+        Menú
+        </h2>
+
+        <button onclick="showAll()">
+            🏠 Inicio
+        </button>
+
+        <button onclick="goProfile()">
+            👤 Perfil
+        </button>
+
+        <button
+            class="theme-btn"
+            id="btnTema"
+        >
+
+            🌙 Cambiar tema
+
+        </button>
+
+        <button
+            class="logout-btn"
+            onclick="logout()"
+        >
+
+            ⛔ Cerrar sesión
+
+        </button>
+
     </div>
-</header>
 
-    
-
-    <div class="alphabet"></div>
-
-    <div class="movies-grid" id="movies">
-        </div>
+    <!-- ======================================== -->
+    <!-- SCRIPT -->
+    <!-- ======================================== -->
 
     <script src="js/main.js"></script>
 
 </body>
 </html>
-
