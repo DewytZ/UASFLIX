@@ -212,36 +212,108 @@ function logout() {
 
 
 // ===============================
-// FOOTER → SCROLL + HIGHLIGHT
+// FOOTER → MINI VENTANA INTERACTIVA
 // ===============================
-document.querySelectorAll('.footer-links a').forEach(link => {
-    link.addEventListener('click', function (e) {
-        e.preventDefault();
 
-        const id = this.getAttribute('href');
-        const seccion = document.querySelector(id);
+const footerData = {
+    "que-es": {
+        title: "¿Qué es UASFLIX?",
+        body: `
+            UASFLIX es una plataforma académica de la Universidad Autónoma de Sinaloa
+            diseñada para mostrar contenido audiovisual de forma moderna, organizada
+            y visualmente atractiva.
+        `
+    },
 
-        if (!seccion) return;
+    "objetivo": {
+        title: "Objetivo",
+        body: `
+            Facilitar el acceso al contenido académico y multimedia mediante una
+            interfaz sencilla, rápida y agradable para los estudiantes.
+        `
+    },
 
-        const titulo = seccion.querySelector('.titulo-seccion');
+    "mision": {
+        title: "Misión",
+        body: `
+            Ofrecer una experiencia digital moderna que apoye la difusión de
+            contenido universitario de manera eficiente.
+        `
+    },
 
-        seccion.classList.add('activa');
+    "vision": {
+        title: "Visión",
+        body: `
+            Convertirse en una plataforma universitaria innovadora, funcional
+            y representativa para la comunidad estudiantil.
+        `
+    }
+};
 
-        seccion.scrollIntoView({
-            behavior: "smooth",
-            block: "center"
-        });
+const popup = document.getElementById("footerPopup");
+const popupTitle = document.getElementById("footerPopupTitle");
+const popupBody = document.getElementById("footerPopupBody");
+const closeBtn = document.getElementById("footerPopupClose");
 
-        document.querySelectorAll('.titulo-seccion').forEach(t => {
-            t.classList.remove('highlight');
-        });
+let currentSection = null;
 
-        setTimeout(() => {
-            if (titulo) {
-                titulo.classList.remove('highlight');
-                void titulo.offsetWidth; 
-                titulo.classList.add('highlight');
-            }
-        }, 700);
+/* OCULTAR COMPLETAMENTE AL INICIO */
+
+popup.style.display = "none";
+
+/* BOTONES */
+
+document.querySelectorAll(".footer-link-btn").forEach(btn => {
+
+    btn.addEventListener("click", () => {
+
+        const section = btn.dataset.section;
+
+        /* SI YA ESTÁ ABIERTO → CERRAR */
+
+        if (currentSection === section) {
+
+            popup.style.display = "none";
+
+            btn.classList.remove("active");
+
+            currentSection = null;
+
+            return;
+        }
+
+        /* LIMPIAR ACTIVOS */
+
+        document.querySelectorAll(".footer-link-btn")
+            .forEach(b => b.classList.remove("active"));
+
+        btn.classList.add("active");
+
+        /* MOSTRAR */
+
+        popupTitle.textContent =
+            footerData[section].title;
+
+        popupBody.innerHTML =
+            footerData[section].body;
+
+        popup.style.display = "block";
+
+        currentSection = section;
     });
 });
+
+/* BOTÓN X */
+
+if (closeBtn) {
+
+    closeBtn.addEventListener("click", () => {
+
+        popup.style.display = "none";
+
+        document.querySelectorAll(".footer-link-btn")
+            .forEach(b => b.classList.remove("active"));
+
+        currentSection = null;
+    });
+}
