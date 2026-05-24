@@ -160,3 +160,98 @@ textarea {
     color: var(--accent);
     margin-bottom: 5px;
 }
+
+/* ==========================================
+   ESTILOS PREMIUM PARA COMENTARIOS (UASFLIX)
+   ========================================== */
+
+/* Contenedor de la lista de comentarios */
+#commentList {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Espacio entre cada comentario */
+}
+
+/* Tarjeta individual de comentario */
+.comment-card {
+    display: flex;
+    gap: 15px;
+    background: rgba(255, 255, 255, 0.03); /* Fondo oscuro translúcido */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+/* Efecto sutil al pasar el mouse por encima */
+.comment-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    border-color: #00e5ff; /* Brillo neón cian */
+    box-shadow: 0 4px 20px rgba(0, 229, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Avatar circular con la inicial del alumno */
+.comment-avatar {
+    width: 42px;
+    height: 42px;
+    background: linear-gradient(135deg, #00e5ff, #0055ff);
+    color: #ffffff;
+    font-weight: bold;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+    flex-shrink: 0; /* Evita que se deforme */
+}
+
+/* Bloque derecho del comentario */
+.comment-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100%;
+}
+
+/* Encabezado: Nombre + Fecha */
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+/* Nombre del Alumno */
+.comment-author {
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+}
+
+/* Fecha del comentario */
+.comment-date {
+    color: #888888;
+    font-size: 0.8rem;
+}
+
+/* Texto del comentario */
+.comment-text {
+    color: #e0e0e0;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    word-break: break-word; /* Evita que textos largos rompan el diseño */
+}
+
+/* Mensaje cuando no hay comentarios aún */
+.no-comments {
+    color: #666666;
+    text-align: center;
+    font-style: italic;
+    padding: 20px 0;
+}
