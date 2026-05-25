@@ -11,54 +11,142 @@
 
 <body>
 
-<header>
+    <!-- HEADER IGUAL AL DE LA PÁGINA PRINCIPAL -->
+    <header>
 
-    <div class="logo-container">
-        <img src="img/logo uas.png" alt="Logo UAS" class="logo-uas">
-        <div class="logo">UASFLIX</div>
-    </div>
+        <div class="logo-container">
+            <img src="img/logouas.png" alt="Logo UAS" class="logo-uas">
+            <div class="logo">UASFLIX</div>
+        </div>
 
-    <div class="menu-btn">Menú</div>
+        <div class="header-right">
+            <div class="profile-circle" onclick="toggleSidebar()">
+                <img src="img/perfil.png" alt="Perfil">
+            </div>
+        </div>
 
-    <!-- SIDEBAR -->
+    </header>
+
+    <!-- SIDEBAR IGUAL AL DE LA PÁGINA PRINCIPAL -->
     <div id="sidebar" class="sidebar">
-
-        <h2>Menú</h2>
+        <h2 onclick="toggleSidebar()">Menú</h2>
 
         <button onclick="goHome()">🏠 Inicio</button>
 
-        <button id="btnTema">🌙 Cambiar tema</button>
+        <button class="theme-btn" id="btnTema">🌙 Cambiar tema</button>
 
-        <button onclick="logout()">⛔ Cerrar sesión</button>
-
+        <button class="logout-btn" onclick="logout()">⛔ Cerrar sesión</button>
     </div>
 
-</header>
+    <!-- PERFIL -->
+    <div class="profile-container">
+        <div class="profile-card">
+            <img src="img/logouas.png" class="profile-avatar" alt="Avatar UAS">
 
-<!-- PERFIL -->
-<div class="profile-container">
+            <h1>Mi Perfil</h1>
 
-    <div class="profile-card">
+            <div class="profile-info">
+                <label>Nombre de usuario</label>
+                <div id="username"></div>
+            </div>
 
-        <img src="img/logouas.png" class="profile-avatar">
-
-        <h1>Mi Perfil</h1>
-
-        <div class="profile-info">
-            <label>Nombre de usuario</label>
-            <div id="username"></div>
+            <div class="profile-info">
+                <label>Correo electrónico</label>
+                <div id="email"></div>
+            </div>
         </div>
-
-        <div class="profile-info">
-            <label>Correo electrónico</label>
-            <div id="email"></div>
-        </div>
-
     </div>
 
-</div>
+    <!-- FOOTER IGUAL AL DE LA PÁGINA PRINCIPAL -->
+    <footer class="footer">
+        <div class="footer-container">
 
-<script src="js/perfil.js"></script>
+            <div class="footer-column">
+                <h3>UASFLIX</h3>
+                <p>
+                    Plataforma académica de la Universidad
+                    Autónoma de Sinaloa.
+                </p>
+            </div>
 
+            <div class="footer-column">
+                <h4>CONTENIDO</h4>
+
+                <div class="footer-links vertical">
+                    <button class="footer-link-btn" data-section="que-es" type="button">
+                        ▶ ¿Qué es?
+                    </button>
+                    <button class="footer-link-btn" data-section="objetivo" type="button">
+                        ▶ Objetivo
+                    </button>
+                    <button class="footer-link-btn" data-section="mision" type="button">
+                        ▶ Misión
+                    </button>
+                    <button class="footer-link-btn" data-section="vision" type="button">
+                        ▶ Visión
+                    </button>
+                </div>
+            </div>
+
+            <div class="footer-column footer-popup-column">
+                <div class="footer-popup" id="footerPopup" style="display:none;">
+                    <div class="footer-popup-head">
+                        <h4 id="footerPopupTitle">Selecciona una opción</h4>
+
+                        <button class="footer-popup-close" id="footerPopupClose" type="button">
+                            ✕
+                        </button>
+                    </div>
+
+                    <div class="footer-popup-body" id="footerPopupBody">
+                        Haz clic en una opción de “Contenido” para ver la información aquí.
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>CONTACTO</h4>
+
+                <p class="contact-text">
+                    ¿Sugerencias o contribuciones?
+                </p>
+
+                <div class="email-box">
+                    <span>uasflix@proton.me</span>
+
+                    <a
+                        href="https://mail.google.com/mail/?view=cm&fs=1&to=uasflix@proton.me&su=Contacto%20UASFLIX&body=Hola,%20quiero%20hacer%20una%20consulta."
+                        target="_blank"
+                        class="copy-btn"
+                    >
+                        📧
+                    </a>
+                </div>
+            </div>
+
+            <div class="footer-column">
+                <h4>ENLACES INSTITUCIONALES</h4>
+
+                <div class="footer-logo">
+                    <a href="https://fic.uas.edu.mx/" target="_blank">
+                        <img src="img/FIC.png" alt="FIC">
+                    </a>
+
+                    <a href="https://www.uas.edu.mx/" target="_blank">
+                        <img src="img/logouas.png" alt="UAS">
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+            © 2026 Universidad Autónoma de Sinaloa - UASFLIX
+        </div>
+    </footer>
+
+    <script src="js/perfil.js"></script>
 </body>
 </html>
