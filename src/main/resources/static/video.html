@@ -9,9 +9,29 @@
 <body>
 
 <header>
-    <div class="logo" onclick="window.location.href='Pagina principal.html'" style="cursor:pointer">UASFLIX</div>
-    <button class="theme-btn" onclick="toggleTheme()">Cambiar Tema</button>
+    <div class="logo-container">
+        <div class="logo" onclick="window.location.href='Pagina principal.html'" style="cursor:pointer">
+            UASFLIX
+        </div>
+    </div>
+
+    <div class="header-right">
+        <div class="profile-circle" onclick="toggleSidebar()">
+            <img src="img/perfil.png" alt="Perfil">
+        </div>
+    </div>
 </header>
+
+<!-- SIDEBAR -->
+<div id="sidebar" class="sidebar">
+    <h2 onclick="toggleSidebar()">Menú</h2>
+
+    <button onclick="window.location.href='Pagina principal.html'">🏠 Inicio</button>
+
+    <button id="btnTema">🌙 Cambiar tema</button>
+
+    <button onclick="logout()">⛔ Cerrar sesión</button>
+</div>
 
 <div class="video-wrapper">
     <div class="info-panel" id="infoPanel">
@@ -42,6 +62,96 @@
 
     <div id="commentList"></div>
 </div>
+
+<!-- FOOTER IGUAL AL DEL PERFIL -->
+<footer class="footer">
+    <div class="footer-container">
+
+        <div class="footer-column">
+            <h3>UASFLIX</h3>
+            <p>
+                Plataforma académica de la Universidad
+                Autónoma de Sinaloa.
+            </p>
+        </div>
+
+        <div class="footer-column">
+            <h4>CONTENIDO</h4>
+
+            <div class="footer-links vertical">
+                <button class="footer-link-btn" data-section="que-es" type="button">
+                    ▶ ¿Qué es?
+                </button>
+                <button class="footer-link-btn" data-section="objetivo" type="button">
+                    ▶ Objetivo
+                </button>
+                <button class="footer-link-btn" data-section="mision" type="button">
+                    ▶ Misión
+                </button>
+                <button class="footer-link-btn" data-section="vision" type="button">
+                    ▶ Visión
+                </button>
+            </div>
+        </div>
+
+        <div class="footer-column footer-popup-column">
+            <div class="footer-popup" id="footerPopup" style="display:none;">
+                <div class="footer-popup-head">
+                    <h4 id="footerPopupTitle">Selecciona una opción</h4>
+
+                    <button class="footer-popup-close" id="footerPopupClose" type="button">
+                        ✕
+                    </button>
+                </div>
+
+                <div class="footer-popup-body" id="footerPopupBody">
+                    Haz clic en una opción de “Contenido” para ver la información aquí.
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-column">
+            <h4>CONTACTO</h4>
+
+            <p class="contact-text">
+                ¿Sugerencias o contribuciones?
+            </p>
+
+            <div class="email-box">
+                <span>uasflix@proton.me</span>
+
+                <a
+                    href="https://mail.google.com/mail/?view=cm&fs=1&to=uasflix@proton.me&su=Contacto%20UASFLIX&body=Hola,%20quiero%20hacer%20una%20consulta."
+                    target="_blank"
+                    class="copy-btn"
+                >
+                    📧
+                </a>
+            </div>
+        </div>
+
+        <div class="footer-column">
+            <h4>ENLACES INSTITUCIONALES</h4>
+
+            <div class="footer-logo">
+                <a href="https://fic.uas.edu.mx/" target="_blank">
+                    <img src="img/FIC.png" alt="FIC">
+                </a>
+
+                <a href="https://www.uas.edu.mx/" target="_blank">
+                    <img src="img/logouas.png" alt="UAS">
+                </a>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="footer-divider"></div>
+
+    <div class="footer-bottom">
+        © 2026 Universidad Autónoma de Sinaloa - UASFLIX
+    </div>
+</footer>
 
 <script src="js/video.js"></script>
 
