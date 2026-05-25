@@ -1,9 +1,9 @@
-let userRating = 0; // Calificación que el usuario actual va a elegir
+let userRating = 0;
 let globalMovieId = null;
 
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const movieId = urlParams.get('id');
+    const movieId = urlParams.get("id");
     globalMovieId = movieId;
 
     if (!movieId) {
@@ -12,52 +12,91 @@ document.addEventListener("DOMContentLoaded", async () => {
         return;
     }
 
-    // Cargar datos de la película, promedio de estrellas y comentarios en paralelo
+    // Sidebar y tema
+    const sidebar = document.getElementById("sidebar");
+    const btnTema = document.getElementById("btnTema");
+
+    window.toggleSidebar = function () {
+        if (!sidebar) return;
+        sidebar.classList.toggle("active");
+    };
+
+    function applySavedTheme() {
+        if (localStorage.getItem("theme") === "light") {
+            document.body.classList.add("light-theme");
+        } else {
+            document.body.classList.remove("light-theme");
+        }
+    }
+
+    window.toggleTheme = function () {
+        document.body.classList.toggle("light-theme");
+
+        localStorage.setItem(
+            "theme",
+            document.body.classList.contains("light-theme") ? "light" : "dark"
+        );
+    };
+
+    if (btnTema) {
+        btnTema.addEventListener("click", toggleTheme);
+    }
+
+    applySavedTheme();
+
+    // Datos de la película
     try {
         const response = await fetch("/api/movies/" + movieId);
         if (!response.ok) throw new Error("Película no encontrada");
-        
+
         const peli = await response.json();
 
-        // Llenar datos de la película
-        document.getElementById("video-frame").src = peli.videoUrl || "https://www.youtube.com/embed/dQw4w9WgXcQ";
+        document.getElementById("video-frame").src =
+            peli.videoUrl || "https://www.youtube.com/embed/dQw4w9WgXcQ";
+
         document.getElementById("movie-title").innerText = peli.title;
         document.getElementById("movie-desc").innerText = peli.description;
         document.getElementById("movie-faculty").innerText = peli.faculty;
-        
-        // Cargar datos interactivos de la Base de Datos
+
         loadAverageRating(movieId);
         loadComments(movieId);
-        
+
     } catch (error) {
         console.error("Error cargando película:", error);
     }
 
     inicializarEstrellas();
+
+    // Footer interactivo
+    inicializarFooter();
 });
 
 /* ===============================
-   LÓGICA DE ESTRELLAS (RATINGS)
+   ESTRELLAS
    =============================== */
 function inicializarEstrellas() {
     const stars = document.querySelectorAll(".star");
+
     stars.forEach((star, index) => {
         star.addEventListener("mouseover", () => {
             resetStars();
             for (let i = 0; i <= index; i++) stars[i].classList.add("hover");
         });
+
         star.addEventListener("click", async () => {
             userRating = index + 1;
             setSelected(userRating);
-            // Mandar la calificación a la base de datos inmediatamente al dar clic
             await saveRatingToDB(userRating);
         });
     });
 
-    document.getElementById("stars").addEventListener("mouseleave", () => {
-        resetStars();
-        setSelected(userRating);
-    });
+    const starsContainer = document.getElementById("stars");
+    if (starsContainer) {
+        starsContainer.addEventListener("mouseleave", () => {
+            resetStars();
+            setSelected(userRating);
+        });
+    }
 }
 
 function resetStars() {
@@ -72,10 +111,8 @@ function setSelected(value) {
     for (let i = 0; i < value; i++) stars[i].classList.add("selected");
 }
 
-// Guarda la calificación en el backend
 async function saveRatingToDB(starsValue) {
-    // Jalamos el correo del usuario que inició sesión (¡Asegúrate de guardarlo en el login!)
-    const userEmail = localStorage.getItem("userEmail") || "anonimo@uas.edu.mx"; 
+    const userEmail = localStorage.getItem("userEmail") || "anonimo@uas.edu.mx";
 
     try {
         const response = await fetch("/api/ratings", {
@@ -89,7 +126,6 @@ async function saveRatingToDB(starsValue) {
         });
 
         if (response.ok) {
-            // Si se guardó con éxito, recalculamos el promedio en pantalla
             loadAverageRating(globalMovieId);
         }
     } catch (error) {
@@ -97,13 +133,11 @@ async function saveRatingToDB(starsValue) {
     }
 }
 
-// Trae el promedio de estrellas desde Java
 async function loadAverageRating(movieId) {
     try {
         const response = await fetch(`/api/ratings/movie/${movieId}/average`);
         if (response.ok) {
             const avg = await response.json();
-            // Muestra el promedio redondeado a 1 decimal (ej: 4.5)
             document.getElementById("avg").innerText = avg ? avg.toFixed(1) : "0";
         }
     } catch (error) {
@@ -112,13 +146,10 @@ async function loadAverageRating(movieId) {
 }
 
 /* ===============================
-   LÓGICA DE COMENTARIOS
+   COMENTARIOS
    =============================== */
-
-// Publicar un nuevo comentario hacia el Backend
 async function addComment() {
     const text = document.getElementById("commentInput").value.trim();
-    // Jalamos el nombre del alumno guardado durante el login
     const userName = localStorage.getItem("userName") || "Estudiante UAS";
 
     if (!text) {
@@ -138,8 +169,8 @@ async function addComment() {
         });
 
         if (response.ok) {
-            document.getElementById("commentInput").value = ""; // Limpiar caja
-            loadComments(globalMovieId); // Recargar la lista para mostrar el nuevo
+            document.getElementById("commentInput").value = "";
+            loadComments(globalMovieId);
         } else {
             alert("No se pudo guardar el comentario.");
         }
@@ -148,7 +179,6 @@ async function addComment() {
     }
 }
 
-// Cargar y mostrar los comentarios guardados en la BD
 async function loadComments(movieId) {
     try {
         const response = await fetch(`/api/comments/movie/${movieId}`);
@@ -156,7 +186,7 @@ async function loadComments(movieId) {
 
         const listaComentarios = await response.json();
         const container = document.getElementById("commentList");
-        container.innerHTML = ""; // Vaciar lista anterior
+        container.innerHTML = "";
 
         if (listaComentarios.length === 0) {
             container.innerHTML = `<p class="no-comments">Sé el primero en dejar un comentario...</p>`;
@@ -165,14 +195,15 @@ async function loadComments(movieId) {
 
         listaComentarios.forEach(c => {
             const div = document.createElement("div");
-            div.classList.add("comment-card"); // Usaremos esta nueva clase en CSS
-            
-            // Formatear un poco la fecha si viene del backend
-            const fecha = c.createdAt ? new Date(c.createdAt).toLocaleDateString('es-MX', {
-                day: '2-digit',
-                month: 'short',
-                year: 'numeric'
-            }) : "Reciente";
+            div.classList.add("comment-card");
+
+            const fecha = c.createdAt
+                ? new Date(c.createdAt).toLocaleDateString("es-MX", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+                })
+                : "Reciente";
 
             div.innerHTML = `
                 <div class="comment-avatar">
@@ -193,6 +224,93 @@ async function loadComments(movieId) {
     }
 }
 
-function toggleTheme() {
-    document.body.classList.toggle("light-theme");
+/* ===============================
+   CERRAR SESIÓN
+   =============================== */
+function logout() {
+    localStorage.clear();
+    window.location.href = "index.html";
+}
+
+/* ===============================
+   FOOTER INTERACTIVO
+   =============================== */
+function inicializarFooter() {
+    const footerData = {
+        "que-es": {
+            title: "¿Qué es UASFLIX?",
+            body: `
+                UASFLIX es una plataforma académica de la Universidad Autónoma de Sinaloa
+                diseñada para mostrar contenido audiovisual de forma moderna, organizada
+                y visualmente atractiva.
+            `
+        },
+        objetivo: {
+            title: "Objetivo",
+            body: `
+                Facilitar el acceso al contenido académico y multimedia mediante una
+                interfaz sencilla, rápida y agradable para los estudiantes.
+            `
+        },
+        mision: {
+            title: "Misión",
+            body: `
+                Ofrecer una experiencia digital moderna que apoye la difusión de
+                contenido universitario de manera eficiente.
+            `
+        },
+        vision: {
+            title: "Visión",
+            body: `
+                Convertirse en una plataforma universitaria innovadora, funcional
+                y representativa para la comunidad estudiantil.
+            `
+        }
+    };
+
+    const popup = document.getElementById("footerPopup");
+    const popupTitle = document.getElementById("footerPopupTitle");
+    const popupBody = document.getElementById("footerPopupBody");
+    const closeBtn = document.getElementById("footerPopupClose");
+
+    let currentSection = null;
+
+    if (popup) {
+        popup.style.display = "none";
+    }
+
+    document.querySelectorAll(".footer-link-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+            const section = btn.dataset.section;
+
+            if (currentSection === section && popup && popup.style.display === "block") {
+                popup.style.display = "none";
+                btn.classList.remove("active");
+                currentSection = null;
+                return;
+            }
+
+            document.querySelectorAll(".footer-link-btn").forEach(b => b.classList.remove("active"));
+            btn.classList.add("active");
+
+            if (popupTitle && popupBody && footerData[section]) {
+                popupTitle.textContent = footerData[section].title;
+                popupBody.innerHTML = footerData[section].body;
+            }
+
+            if (popup) {
+                popup.style.display = "block";
+            }
+
+            currentSection = section;
+        });
+    });
+
+    if (closeBtn && popup) {
+        closeBtn.addEventListener("click", () => {
+            popup.style.display = "none";
+            document.querySelectorAll(".footer-link-btn").forEach(b => b.classList.remove("active"));
+            currentSection = null;
+        });
+    }
 }
