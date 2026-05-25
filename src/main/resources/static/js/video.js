@@ -314,3 +314,11 @@ function inicializarFooter() {
         });
     }
 }
+
+function goProfile(){
+
+    window.location.href =
+        "perfil.html";
+
+}
+
