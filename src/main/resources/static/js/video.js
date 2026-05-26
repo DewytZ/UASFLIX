@@ -240,30 +240,42 @@ function inicializarFooter() {
         "que-es": {
             title: "¿Qué es UASFLIX?",
             body: `
-                UASFLIX es una plataforma académica de la Universidad Autónoma de Sinaloa
-                diseñada para mostrar contenido audiovisual de forma moderna, organizada
-                y visualmente atractiva.
+                UASFLIX es una plataforma digital impulsada por estudiantes de la Universidad Autónoma de Sinaloa. Se concibe 
+                como un repositorio audiovisual que reúne películas de distintos géneros y épocas, con el propósito de ofrecer 
+                a la comunidad universitaria un espacio confiable y accesible. Más que un catálogo, UASFLIX se plantea como un 
+                puente entre la cultura cinematográfica y la vida académica, integrando el valor del séptimo arte en la formación 
+                integral de los estudiantes.
             `
         },
         objetivo: {
             title: "Objetivo",
             body: `
-                Facilitar el acceso al contenido académico y multimedia mediante una
-                interfaz sencilla, rápida y agradable para los estudiantes.
+                Nuestra meta en UASFLIX es consolidarnos como una herramienta académica y recreativa que facilite el acceso a 
+                material audiovisual de calidad. Buscamos fomentar el uso responsable de la tecnología, impulsar la apreciación 
+                del cine como recurso cultural y fortalecer la identidad universitaria. Además, aspiramos a ser un referente 
+                dentro de la UAS, ofreciendo un espacio que no solo entretenga, sino que también inspire pensamiento crítico, 
+                creatividad y sentido de pertenencia institucional.
             `
         },
         mision: {
             title: "Misión",
             body: `
-                Ofrecer una experiencia digital moderna que apoye la difusión de
-                contenido universitario de manera eficiente.
+                En UASFLIX, nos comprometemos a brindar a estudiantes, docentes y personal universitario un repositorio confiable, 
+                organizado y de fácil navegación. A través de nuestro catálogo promovemos la cultura cinematográfica, el acceso 
+                equitativo a recursos digitales y la integración de contenidos que enriquecen la experiencia universitaria. Nuestro 
+                compromiso es ser un aliado en el proceso educativo, ofreciendo películas que complementen la enseñanza, fortalezcan 
+                valores y estimulen la curiosidad intelectual.
             `
         },
         vision: {
             title: "Visión",
             body: `
-                Convertirse en una plataforma universitaria innovadora, funcional
-                y representativa para la comunidad estudiantil.
+                En UASFLIX aspiramos a convertirnos en la plataforma audiovisual de referencia dentro de la Universidad Autónoma 
+                de Sinaloa, reconocida por su calidad, accesibilidad y aporte cultural. Nos proyectamos hacia la innovación 
+                tecnológica, la expansión de nuestro catálogo y la integración de contenidos educativos que impulsen el prestigio 
+                de la institución. Queremos trascender como un modelo de repositorio universitario que inspire a otras comunidades 
+                académicas, consolidándonos como un espacio donde cine y educación convergen para formar generaciones más críticas, 
+                creativas y comprometidas con su entorno..
             `
         }
     };
